@@ -1,0 +1,14 @@
+以下を実行する
+
+ALTER TABLE tbl_profile
+ADD COLUMN professor1 VARCHAR(24) NOT NULL,
+ADD COLUMN professor2 VARCHAR(24) NOT NULL,
+ADD COLUMN professor3 VARCHAR(24) NOT NULL,
+ADD COLUMN professor4 VARCHAR(24) NOT NULL;
+
+
+
+_input("担任教員名（ゼミ担当教員等）１学年", "professor1", $professor1, "text", "", "");
+_input("担任教員名（ゼミ担当教員等）２学年", "professor2", $professor2, "text", "", "");
+_input("担任教員名（ゼミ担当教員等）３学年", "professor3", $professor3, "text", "", "");
+_input("担任教員名（ゼミ担当教員等）４学年", "professor4", $professor4, "text", "", "");

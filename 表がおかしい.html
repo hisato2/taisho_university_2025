@@ -1,0 +1,318 @@
+
+<form action='registration.php' method='post' onSubmit='return check()'><!DOCTYPE html>
+<html dir="ltr" lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=yes, maximum-scale=1.0, minimum-scale=1.0">
+    <title>大正大学社会福祉学科|学修支援システム</title>
+    <meta name="description" content="大正大学社会福祉学科|学修行動計画作成システム" />
+    <meta content="大正大学社会福祉学科,学修行動計画作成システム" name="author" />
+    <meta content="大正大学社会福祉学科,学修行動計画作成システム" name="keywords" />
+    <link rel='stylesheet' href='./css/style.css' type='text/css' media='all' />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+
+</head>
+
+
+
+
+<body>
+    <div class="container-fluid2">
+
+        <form action='select_sheet.php' method='post' onSubmit='return check()'>
+            <header>
+
+                
+                <img src="./images/header_image2.png" class="w-100" alt=" ... " />
+                <h1></h1>
+                <h2></h2>
+
+
+                <table width="100%">
+                    <tr>
+
+                        <td width="33%">
+                        </td>
+
+
+
+                        <td class='text-center pt-1' width='33%'><button type='submit' class='btn2 btn-secondary'>戻る</button></td>
+
+
+                        <td class='text-end' width="33%">
+                            <span class='fw600'>学生 2910003 </span>&emsp;&emsp;                        </td>
+                    </tr>
+                </table>
+
+
+
+
+            </header>
+
+        </FORM>
+
+        <main>
+            <!-- 16:9 aspect ratio -->
+            <div class="row">
+                <!--メインエリアー-->
+                <div class="col-sm-12">
+                    <div class="tight_w">
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+            // フォームの入力欄が更新されたかどうかを表すフラグです。
+            var isChanged = true;
+
+            $(window).bind("beforeunload", function() {
+                /*    console.log(isChanged);*/
+                if (isChanged) {
+                    return "このページを離れようとしています。データを保存しないと失われます。";
+                }
+            });
+
+            $("button[type=submit]").click(function() {
+                isChanged = false;
+            });
+        });
+    </script>
+  <h4 class="my-4 mx-4">学修行動計画（リフレクション・シート）＜1年次＞(４Q) </h4>
+
+<table class="table changing-line" >
+  <tr style="border: 1px solid #fff">
+      <td width="5%" rowspan="2" class="changing-line text-center text-middle color_td1">
+        <span class="fw600">年次</span>
+      </td>
+      <td width="12.5%" rowspan="2" class='changing-line text-middle color_td1'>
+        <span class="fw600">1.共通の到達目標</span>
+      </td>
+      <td width="12.5%" rowspan="2" class='changing-line text-middle color_td1'>
+        <span class="fw600">2.「共通の到達目標」を踏まえた、あなたの到達目標</span>
+      </td>
+      <td colspan="4" class="changing-line text-center text-middle color_td1">
+        <span class="fw600">3.学修行動の振り返り</span>
+      </td>
+
+      <td width="12.5%" rowspan="2" class='changing-line text-middle color_td4'>
+        <span class="fw600">4.3.の振り返りを踏まえた「あなたの到達目標」</span>
+        <br><span class="fs80"></span>
+      </td>
+      <td width="12.5%" rowspan="2" class='changing-line text-middle color_td4'>
+        <span class="fw600">5.「あなたの到達目標」達成に向けて、次のクォーターまでに、あなたがさらにやること、努力すること</span><br>
+        <span class="fs80"></span>
+      </td>
+    </tr>
+  
+
+
+    <tr style="border: 1px solid #fff">
+      <td  width="12.5%" class='changing-line text-middle color_td1'>
+        <span class="fw600">①.共通の目標達成度評価(評価基準表に基づき自己評価)</span>
+        <br><span class="fs80"></span>
+      </td>
+      <td width="12.5%" class='changing-line text-middle color_td1'>
+        <span class="fw600">②.①に関して、あなたが獲得できたこと、達成できたこと、できるようになったこと（2.「あなたの達成目標」に関連付けて記述）</span>
+        <br><span class="fs80"></span>
+      </td>
+      <td width="12.5%"  class='changing-line text-middle color_td1'>
+        <span class="fw600">③ あなたの到達目標の達成に必要な力（1Qゴールシートであなたが獲得目標として設定した力）</span>
+      </td>
+      <td width="12.5%" class='changing-line text-middle color_td1'>
+        <span class="fw600">④ ③で掲げた獲得目標の達成度評価
+                      <!-- （③の力を用いて、できるようになったこと/できなかったこと、向上した技能/獲得に至らなかった技能、新たに始めた活動、学修が進んだこと/学修が進まなかったこと、などを振り返りながら、「その力がどの程度発揮されたか/発揮されなかったか」という観点で自己評価してください。） -->
+        <span class="fs80">（50字以上）</span>
+      </td>
+  </tr>
+
+  
+
+
+
+
+  <tr style="border: 1px solid #a01b1b">
+    <td  ROWSPAN="2" class='changing-line text-middle color_td1'>
+    </td>
+
+    <td ROWSPAN="4" class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  ROWSPAN="4"  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td   ROWSPAN="4" class='changing-line text-middle color_td1'>
+    </td>
+
+
+    <td   ROWSPAN="4"  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  ROWSPAN="4"  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  ROWSPAN="4"  class='changing-line text-middle color_td1'>
+    </td>
+
+  </tr>
+
+
+
+
+  <tr style="border: 1px solid #a01b1b">
+    
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+  </tr>
+
+
+
+
+
+  
+
+  <tr style="border: 1px solid #a01b1b">
+    <td  ROWSPAN="2" class='changing-line text-middle color_td1'>
+    </td>
+
+
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+  </tr>
+
+
+
+
+
+  
+
+  <tr style="border: 1px solid #a01b1b">
+
+   
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+    <td  class='changing-line text-middle color_td1'>
+    </td>
+
+  </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</table>
+
+
+
+    <h6>教員からのコメント</h6>
+    <table class="table table-bordered changing-line">
+        <tr>
+            <td><input type='hidden' name='comments_of_teacher' value=''><div class='wbr' style='background-color:#ffffff; min-height: 200px'></div></td>
+        </tr>
+    </table>
+
+
+
+
+
+
+<input type='hidden' name='TABLE' value="tbl_reflection_base">
+<input type='hidden' name='METHOD' value="UP_DATE">
+<input type='hidden' name='STUDENT_NUMBER' value="2910003">
+<input type='hidden' name='SELECT_NEN' value="1">
+
+<br>
+<br>
+</table>
+<p class="text-center">
+  状態：<span style ='font-weight:900;font-size: 14px;color:darkgoldenrod'>下書中</span></p>
+
+<table class="table">
+  <tr>
+    <td>
+      <input type='hidden' name='title' value=下書き><input type='hidden' name='column' value=ref_base_1><button type='submit' name='status' value=1 class='mt-5 btn btn-warning w-200px' >下書き</button></form>    </td>
+    <td>
+      <input type='hidden' name='title' value=提出><input type='hidden' name='column' value=ref_base_1><button type='submit' name='status' value=2 class='mt-5 btn btn-primary w-200px' >提出</button></form>    </td>
+
+    <td>
+        <div class="text-center mt-5" style="height:100px">
+    <form action='select_sheet.php' method='post' onSubmit='return check()'>
+      <button type='submit' class='btn btn-secondary w-200px'>戻る</button>
+    </form>
+  </div>
+    </td>
+  </tr>
+</table>
+
+</form>
+
+
+</div>
+</div>
+<!--サイドエリア-->
+<!--サイドバー-->
+</div>
+</main>
+
+
+
+
+<!-- / フッター -->
+<footer class="pt-4">
+    <div class="row bgfooter pt-2">
+        <div class="col-sm-12 float-right ">
+            <h5 class="text-white">大正大学社会福祉学科</h5>
+            <p class="text-white text-center copyright ">Copyright(c) 2022 大正大学社会福祉学科 All Rights Reserved
+            </p>
+        </div>
+    </div>
+</footer>
+
+</div>
+
+
+<script language="javascript">
+    function pushHideButton() {
+        var txtPass = document.getElementById("textPassword");
+        var btnEye = document.getElementById("buttonEye");
+        if (txtPass.type === "text") {
+            txtPass.type = "password";
+            btnEye.className = "fa fa-eye";
+        } else {
+            txtPass.type = "text";
+            btnEye.className = "fa fa-eye-slash";
+        }
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js " integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW " crossorigin="anonymous "></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
+
+</body>
+
+</html>
