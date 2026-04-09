@@ -20,6 +20,10 @@ $ACTION = "select_sheet.php";
 require('./disp_parts/header.php');
 require('data_keep.php');
 
+$midashino_atama = "";
+$sw_target = "";
+$intern_target = "";
+$study_area = "";
 
 
 
@@ -189,17 +193,20 @@ if ($_SESSION['SELECT_NEN'] == 2) {
 if ($_SESSION['SELECT_NEN'] == 3) {
     $midashino_atama = "２年次に";
     $sw_target = "（ソーシャルワーク実習Ⅱ）";
-    $intern_target = "（精神保健福祉援助Ⅰ（単独）/インターンシップⅡ）";
+    $intern_target = "（精神保健福祉援助Ⅰ/インターンシップⅡ）";
     //$study_area = "edit";
     $study_area = "";
 }
+
+
 if ($_SESSION['SELECT_NEN'] == 4) {
     $midashino_atama = "３年次に";
     $sw_target = "（ソーシャルワーク実習Ⅱ）";
-    $intern_target = "（アドバンス・コース/精神実習Ⅱ（単独））";
-    //$study_area = "edit";
+    $intern_target = "（精神保健福祉援助Ⅰ/インターンシップⅡ）";
     $study_area = "";
 }
+
+
 
 
 dsip_midashi("学修行動計画(ゴール・シート)" . $_SESSION['SELECT_NEN']  . "年次（1Q）");
@@ -218,7 +225,7 @@ dsip_koumoku("1-1." . $midashino_atama . "設定した大学卒業後の自分")
         <tr>
             <td width="15%"><span class="fw600">（対象）</span><br>誰に対して…or<br>何に対して</td>
             <td width="15%"><span class="fw600">（実践フィールド）</span><br>どこで…</td>
-            <td width="15%"><span class="fw600">（職業人たる自己）</span><br>どのような立場で…<br>or どのよなう職種で…</td>
+            <td width="15%"><span class="fw600">（職業人たる自己）</span><br>どのような立場で…<br>or どのような職種で…</td>
             <td width="15%"><span class="fw600">（実践・活動の課題）</span><br>何を…</td>
             <td width="15%"><span class="fw600">（実践・活動の方法）</span><br>どのように…</td>
             <td width="15%"><span class="fw600">（実践・活動において<br>目指す成果）</span><br>…を実現する</td>
@@ -1282,7 +1289,7 @@ $column = "goal1Q_" . $_SESSION['SELECT_NEN'];
                 $dis = "disabled";
             }
 
-            btn_submit("下書き", $column, $dis);
+           btn_submit("下書き", "draft", $column, $dis);
             ?>
         </td>
         <td>
@@ -1292,7 +1299,7 @@ $column = "goal1Q_" . $_SESSION['SELECT_NEN'];
             } else {
                 $dis = "disabled";
             }
-            btn_submit("提出", $column, $dis);
+            btn_submit("提出", "submit", $column, $dis);
             ?>
         </td>
 
@@ -1303,7 +1310,7 @@ $column = "goal1Q_" . $_SESSION['SELECT_NEN'];
 </table>
 <?php
 
-
+echo "</form>";
 require('./disp_parts/footer.php');
 exit;
 ?>

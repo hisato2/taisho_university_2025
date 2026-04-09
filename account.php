@@ -77,7 +77,7 @@ _input("パスワード変更", "set_pass", "", "password", "", "");
 <table class="table">
   <tr>
     <td>
-      <?php btn_submit("個人情報登録", "", ""); ?>
+      <?php btn_submit2("個人情報登録", "", ""); ?>
     </td>
     <td>
       <?php btn_return("index.php", "戻る"); ?>
@@ -87,10 +87,7 @@ _input("パスワード変更", "set_pass", "", "password", "", "");
 
 <?PHP
 
-
-
-
-
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

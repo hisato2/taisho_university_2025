@@ -262,26 +262,31 @@ function tbl_institution_overview_UPDATE($student_number, $学年, $種別)
   $_POST['施設情報1'] = "";
   $_POST['施設情報2'] = "";
 
-  if ($_POST['status'] == "削除") {
+if (
+  (isset($_POST['action']) && $_POST['action'] === "delete") ||
+  (isset($_POST['status']) && $_POST['status'] === "削除") // 互換
+) {
 
-    if (!isset($_POST['DELETE'])) {
-      dsip_msg("削除するをチェックしてください");
-      btn_return("index.php", "戻る");
-      exit;
-    }
-    if ($_POST['DELETE'] == "on") {
-      $cnt = tbl_institution_overview_DELETE($student_number, $学年, $種別);
-      exit;
-    }
+  if (!isset($_POST['DELETE'])) {
+    dsip_msg("削除するをチェックしてください");
+    btn_return("index.php", "戻る");
+    exit;
   }
 
+  if ($_POST['DELETE'] === "on") {
+    tbl_institution_overview_DELETE($student_number, $学年, $種別);
+    exit;
+  }
+}
 
   // テーブルにレコードが存在するかチェック
   $WHERE = "((学籍番号='" . $student_number . "') AND (学年=" . $学年 . " ) AND (実習種別='" . $種別 . "'))";
   $cnt = RECODE_CHECK("tbl_institution_overview", $WHERE);
 
-  $開始日 = $_POST['実習開始日'];
-  $終了日 = $_POST['実習終了日'];
+  $開始日 = $_POST['実習開始日'] ?? "";
+  $終了日 = $_POST['実習終了日'] ?? "";
+
+
 
   $開始日 = mb_ereg_replace('年', '/', $開始日);
   $開始日 = mb_ereg_replace('月', '/', $開始日);
@@ -383,8 +388,6 @@ function tbl_student_introduction_DELETE($student_number)
   exit;
 }
 
-
-
 //////////////////////////////////////////////////
 // 学生紹介書の更新・新規書込み・削除
 //////////////////////////////////////////////////
@@ -392,7 +395,11 @@ function tbl_student_introduction_DELETE($student_number)
 function tbl_student_introduction_UPDATE($student_number)
 {
 
-  if ($_POST['status'] == "削除") {
+  // 削除処理（action対応＋旧status互換）
+  if (
+    (isset($_POST['action']) && $_POST['action'] === "delete") ||
+    (isset($_POST['status']) && $_POST['status'] === "削除")
+  ) {
 
     if (!isset($_POST['DELETE'])) {
       dsip_msg("削除するをチェックしてください");
@@ -400,9 +407,8 @@ function tbl_student_introduction_UPDATE($student_number)
       exit;
     }
 
-
-    if ($_POST['DELETE'] == "on") {
-      $cnt = tbl_student_introduction_DELETE($student_number);  /*レコード存在するか確認*/
+    if ($_POST['DELETE'] === "on") {
+      $cnt = tbl_student_introduction_DELETE($student_number);
       exit;
     }
   }
@@ -412,57 +418,114 @@ function tbl_student_introduction_UPDATE($student_number)
   $cnt = RECODE_CHECK("tbl_student_introduction", $WHERE);
 
 
+  // 新規登録
+  if ($cnt == 0) {
 
-
-
-  if ($cnt == 0) {   /*新規書込み*/
     $pdo = new PDO(DSN, DB_USER, DB_PASS);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
     try {
-      $sql = "insert tbl_student_introduction(`学籍番号`, `学年`, `氏名`, `かな`, `生年月日`, `資格課程`, `郵便現住所`, `現住所`, `電話`, `郵便帰省先`, `帰省先`, `帰省先電話`, `職歴`, `学内所属団体`, `学外所属団体`, `健康状態`, `考慮事項`, `資格特技`, `趣味`, `自己アピール`, `現場体験`, `準備状況`, `教員コメント`, `指導教員`, `事務担当`) value (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+      $sql = "insert tbl_student_introduction(`学籍番号`, `学年`, `氏名`, `かな`, `生年月日`, `資格課程`, `郵便現住所`, `現住所`, `電話`, `郵便帰省先`, `帰省先`, `帰省先電話`, `職歴`, `学内所属団体`, `学外所属団体`, `健康状態`, `考慮事項`, `資格特技`, `趣味`, `自己アピール`, `現場体験`, `準備状況`, `教員コメント`, `指導教員`, `事務担当`) 
+              values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
       $stmt = $pdo->prepare($sql);
 
+      $stmt->execute([
+        $student_number,
+        $_POST['学年'] ?? "",
+        $_POST['氏名'] ?? "",
+        $_POST['かな'] ?? "",
+        $_POST['生年月日'] ?? "",
+        $_POST['資格課程'] ?? "",
+        $_POST['郵便現住所'] ?? "",
+        $_POST['現住所'] ?? "",
+        $_POST['電話'] ?? "",
+        $_POST['郵便帰省先'] ?? "",
+        $_POST['帰省先'] ?? "",
+        $_POST['帰省先電話'] ?? "",
+        $_POST['職歴'] ?? "",
+        $_POST['学内所属団体'] ?? "",
+        $_POST['学外所属団体'] ?? "",
+        $_POST['健康状態'] ?? "",
+        $_POST['考慮事項'] ?? "",
+        $_POST['資格特技'] ?? "",
+        $_POST['趣味'] ?? "",
+        $_POST['自己アピール'] ?? "",
+        $_POST['現場体験'] ?? "",
+        $_POST['準備状況'] ?? "",
+        "", // 教員コメント（新規時は空）
+        $_POST['指導教員'] ?? "",
+        $_POST['事務担当'] ?? ""
+      ]);
 
-
-      $stmt->execute([$student_number, $_POST['学年'], $_POST['氏名'], $_POST['かな'], $_POST['生年月日'], $_POST['資格課程'], $_POST['郵便現住所'], $_POST['現住所'], $_POST['電話'], $_POST['郵便帰省先'], $_POST['帰省先'], $_POST['帰省先電話'], $_POST['職歴'], $_POST['学内所属団体'], $_POST['学外所属団体'], $_POST['健康状態'], $_POST['考慮事項'], $_POST['資格特技'], $_POST['趣味'], $_POST['自己アピール'], $_POST['現場体験'], $_POST['準備状況'], "", $_POST['指導教員'], $_POST['事務担当']]);
     } catch (\Exception $e) {
-
-
-
       dsip_msg($e->getMessage() . PHP_EOL);
       btn_return("index.php", "戻る");
-
-
       exit;
     }
 
     dsip_msg("追加しました");
     btn_return("index.php", "戻る");
     exit;
-  } else   /*更新書込み*/
 
+  } else {
 
+    // 更新処理
     try {
 
       $pdo = new PDO(DSN, DB_USER, DB_PASS);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = "UPDATE tbl_student_introduction SET 学年=?, 氏名=?, かな=?, 生年月日=?, 資格課程=?, 郵便現住所=?, 現住所=?, 電話=?, 郵便帰省先=?, 帰省先=?, 帰省先電話=?, 職歴=?, 学内所属団体=?, 学外所属団体=?, 健康状態=?, 考慮事項=?, 資格特技=?, 趣味=?, 自己アピール=?, 現場体験=?, 準備状況=?, 教員コメント=?, 指導教員=?, 事務担当=?
- WHERE (学籍番号=?)";
+      $sql = "UPDATE tbl_student_introduction SET 
+                学年=?, 氏名=?, かな=?, 生年月日=?, 資格課程=?, 郵便現住所=?, 現住所=?, 電話=?, 
+                郵便帰省先=?, 帰省先=?, 帰省先電話=?, 職歴=?, 学内所属団体=?, 学外所属団体=?, 
+                健康状態=?, 考慮事項=?, 資格特技=?, 趣味=?, 自己アピール=?, 現場体験=?, 準備状況=?, 
+                教員コメント=?, 指導教員=?, 事務担当=?
+              WHERE (学籍番号=?)";
+
       $stmt = $pdo->prepare($sql);
 
-      $stmt->execute([$_POST['学年'], $_POST['氏名'], $_POST['かな'], $_POST['生年月日'], $_POST['資格課程'], $_POST['郵便現住所'], $_POST['現住所'], $_POST['電話'], $_POST['郵便帰省先'], $_POST['帰省先'], $_POST['帰省先電話'], $_POST['職歴'], $_POST['学内所属団体'], $_POST['学外所属団体'], $_POST['健康状態'], $_POST['考慮事項'], $_POST['資格特技'], $_POST['趣味'], $_POST['自己アピール'], $_POST['現場体験'], $_POST['準備状況'], $_POST['教員コメント'], $_POST['指導教員'], $_POST['事務担当'], $student_number]);
-    } catch (\Exception $e) {
+      $stmt->execute([
+        $_POST['学年'] ?? "",
+        $_POST['氏名'] ?? "",
+        $_POST['かな'] ?? "",
+        $_POST['生年月日'] ?? "",
+        $_POST['資格課程'] ?? "",
+        $_POST['郵便現住所'] ?? "",
+        $_POST['現住所'] ?? "",
+        $_POST['電話'] ?? "",
+        $_POST['郵便帰省先'] ?? "",
+        $_POST['帰省先'] ?? "",
+        $_POST['帰省先電話'] ?? "",
+        $_POST['職歴'] ?? "",
+        $_POST['学内所属団体'] ?? "",
+        $_POST['学外所属団体'] ?? "",
+        $_POST['健康状態'] ?? "",
+        $_POST['考慮事項'] ?? "",
+        $_POST['資格特技'] ?? "",
+        $_POST['趣味'] ?? "",
+        $_POST['自己アピール'] ?? "",
+        $_POST['現場体験'] ?? "",
+        $_POST['準備状況'] ?? "",
+        $_POST['教員コメント'] ?? "",
+        $_POST['指導教員'] ?? "",
+        $_POST['事務担当'] ?? "",
+        $student_number
+      ]);
 
+    } catch (\Exception $e) {
       dsip_msg($e->getMessage() . PHP_EOL);
       btn_return("index.php", "戻る");
+      exit;
     }
-  $mysqli = null;
-  dsip_msg("更新しました");
-  btn_return("index.php", "戻る");
-  exit;
+
+    $mysqli = null;
+    dsip_msg("更新しました");
+    btn_return("index.php", "戻る");
+    exit;
+  }
 }
+
 
 
 
@@ -1886,8 +1949,13 @@ function tbl_institution_UPDATE($法人ID)
     $_POST['実習種別1'] = "";
   }
 
-  if ($_POST['status'] == "法人削除") {
-    $cnt = tbl_institution_DELETE($法人ID);
+
+    $status = $_POST['status'] ?? "";
+
+
+
+  if ($status === "法人削除") {
+      $cnt = tbl_institution_DELETE($法人ID);
     btn_return("practice_info.php", "戻る");
     exit;
   }
@@ -2580,7 +2648,6 @@ function tbl_assignment_check($student_number, $syubetu)
 //ソーシャルワーク実習Ⅱ
 //精神保健福祉援助実習Ⅰ
 //精神保健福祉援助実習Ⅱ
-//アドバンス・クラス実習
 {
 
   $GLOBALS['法人名'] = "";
@@ -3226,6 +3293,16 @@ function tbl_reflection_base_update($student_number, $school_year)
     '今後目標5_4Q',
     '今後課題5_1Q',
     '今後課題5_4Q',
+    'score1Q1',
+    'score1Q4',
+    'score2Q1',
+    'score2Q4',
+    'score3Q1',
+    'score3Q4',
+    'score4Q1',
+    'score4Q4',
+    'score5Q1',
+    'score5Q4',
     'comments_of_teacher'
   ];
 
@@ -3418,6 +3495,16 @@ function tbl_reflection_base_READ($student_number, $school_year)
     '今後目標5_4Q',
     '今後課題5_1Q',
     '今後課題5_4Q',
+    'score1Q1',
+    'score1Q4',
+    'score2Q1',
+    'score2Q4',
+    'score3Q1',
+    'score3Q4',
+    'score4Q1',
+    'score4Q4',
+    'score5Q1',
+    'score5Q4',    
     'comments_of_teacher'
   ];
 
@@ -3449,12 +3536,7 @@ function tbl_reflection_base_READ($student_number, $school_year)
 
 
 
-
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-
-
 
 
 
@@ -3636,7 +3718,7 @@ function tbl_profile_detail_UPDATE($student_number, $school_year)
 
 
 
-      stop($school_year);
+      //stop($school_year);
 
       if ($school_year == 1) {
 
@@ -3914,8 +3996,8 @@ function tbl_goal_sheet_4q_UPDATE($student_number, $school_year)
       $parameter_count = count($insert_params);
 
       // Debugging output (optional)
-      echo "Placeholders in INSERT: $placeholder_count<br>";
-      echo "Parameters in INSERT: $parameter_count<br>";
+      //echo "Placeholders in INSERT: $placeholder_count<br>";
+      //echo "Parameters in INSERT: $parameter_count<br>";
 
       if ($placeholder_count !== $parameter_count) {
         error_log("INSERT Error: Placeholders ($placeholder_count) do not match parameters ($parameter_count).");
@@ -5639,14 +5721,16 @@ function edit_br($text_dat)
 //////////////////////////////////////////////////
 //　汎用ボタン
 //////////////////////////////////////////////////
+
 function btn_return($ACTION, $title)
 {
-
 ?>
   <div class="text-center mt-5" style="height:100px">
-    <form action='<?php echo $ACTION; ?>' method='post' onSubmit='return check()'>
-      <button type='submit' class='btn btn-secondary w-200px'><?php echo $title; ?></button>
-    </form>
+    <button type='button'
+      onclick="location.href='<?php echo $ACTION; ?>'"
+      class='btn btn-secondary w-200px'>
+      <?php echo $title; ?>
+    </button>
   </div>
 <?php
 }
@@ -5684,9 +5768,10 @@ function btn_return2($ACTION, $title, $paraname, $paradata, $table_title)
 //////////////////////////////////////////////////
 function submission_status_put($column, $status, $student_number, $nen)
 
-{
-  //ステータス書込み
 
+{
+
+  //ステータス書込み
 
 
   if ($column == "prof") {
@@ -5704,14 +5789,12 @@ function submission_status_put($column, $status, $student_number, $nen)
   }
 
 
-
   if ($column == "go4Q") {
     if ($nen == "") {
       ERR("年を指定しろ！");
     }
     $column = "goal4Q_" . $nen;
   }
-
 
 
   if ($column == "rbas") {
@@ -5721,14 +5804,14 @@ function submission_status_put($column, $status, $student_number, $nen)
     $column = "ref_base_" . $nen;
   }
 
+
+
+
   $pdo = new PDO(DSN, DB_USER, DB_PASS);
   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
   try {
 
     $sql = "UPDATE tbl_profile SET " . $column . "='" . $status . "' WHERE student_number='" . $student_number . "'";
-
-
-
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
@@ -5756,95 +5839,46 @@ function form_submit($ACTION)
 ////////////////////////////////////////////////////////
 // ボタンのタイトルによって、色、プロパティをセット
 ////////////////////////////////////////////////////////
-function btn_submit($title, $column, $mode)
+
+
+function btn_submit($title, $action, $column, $mode)
 {
+  // ボタン色だけ決める（UI専用）
+  $btntype = "btn-secondary";
+
+  if ($title == "下書き") $btntype = "btn-warning";
+  if ($title == "提出") $btntype = "btn-primary";
+  if ($title == "要修正") $btntype = "btn-danger";
+  if ($title == "承認") $btntype = "btn-success";
+
+  if ($title == "登録") $btntype = "btn-success";
+  if ($title == "変更/削除実行") $btntype = "btn-danger";
+  if ($title == "法人削除") $btntype = "btn-danger";
+  
+  if ($title == "実習生紹介書登録") $btntype = "btn-success";
+  if ($title == "実習施設・機関の概要登録") $btntype = "btn-success";
+  if ($title == "年度更新") $btntype = "btn-warning";
+  if ($title == "コメント登録") $btntype = "btn-success";
+  if ($title == "一括登録") $btntype = "btn-success";
+  if ($title == "初期化") $btntype = "btn-warning";
+
+  // columnはそのまま送る（重要）
+  echo "<input type='hidden' name='column' value='{$column}'>";
+
+  // actionだけ送る（ここが本質）
+  echo "<button type='submit' name='action' value='{$action}' class='mt-5 btn {$btntype} w-200px' {$mode}>{$title}</button>";
+}
 
 
+function btn_submit2($title, $action, $mode = "")
+{
+  $btntype = "btn-secondary";
 
-  $status = "1";
-  if ($title == "ログイン") {
-    echo "<button type='submit' class='mt-5 btn btn-info w-200px'>" . $title . "</button>";
-    $btntype = "btn-primary";
-  } elseif ($title == "個人情報登録") {
-    echo "<button type='submit' class='mt-5 btn btn-info w-200px'>" . $title . "</button>";
-    $btntype = "btn-primary";
-  } else {
-    $btntype = "btn-secondary";
-    if ($title == "下書き") {
-      $status = "1";
-      $btntype = "btn-warning";
-    }
-    if ($title == "提出") {
-      $status = "2";
-      $btntype = "btn-primary";
-    }
+  if (str_contains($title, "登録")) $btntype = "btn-success";
+  if (str_contains($title, "削除")) $btntype = "btn-danger";
+  if (str_contains($title, "更新")) $btntype = "btn-warning";
 
-    if ($title == "要修正") {
-      $status = "3";
-      $btntype = "btn-danger";
-    }
-    if ($title == "承認") {
-      $status = "4";
-      $btntype = "btn-success";
-    }
-
-    if ($title == "登録") {
-      $status = "6";
-      $btntype = "btn-success";
-    }
-
-    if ($title == "変更/削除実行") {
-      $status = "変更/削除";
-      $btntype = "btn-danger";
-    }
-
-
-
-
-
-    if ($title == "法人削除") {
-      $status = "法人削除";
-      $btntype = "btn-danger";
-    }
-
-
-    if ($title == "実習生紹介書登録") {
-      $status = "6";
-      $btntype = "btn-success";
-    }
-
-    if ($title == "実習施設・機関の概要登録") {
-      $status = "6";
-      $btntype = "btn-success";
-    }
-
-    if ($title == "年度更新") {
-      $btntype = "btn-warning";
-    }
-
-    if ($title == "コメント登録") {
-      $status = "0";
-      $btntype = "btn-success";
-    }
-
-    if ($title == "一括登録") {
-
-      $status = "0";
-      $btntype = "btn-success";
-    }
-
-
-    if ($title == "初期化") {
-
-      $status = "0";
-      $btntype = "btn-warning";
-    }
-
-    echo "<input type='hidden' name='title' value=" . $title . ">";
-    echo "<input type='hidden' name='column' value=" . $column . ">";
-    echo "<button type='submit' name='status' value=" . $status . " class='mt-5 btn " . $btntype . " w-200px' " . $mode . ">" . $title . "</button>";
-  }
-  echo "</form>";
+  echo "<button type='submit' name='action' value='{$action}' class='mt-5 btn {$btntype} w-200px' {$mode}>{$title}</button>";
 }
 
 
@@ -6209,7 +6243,7 @@ function _inputv($name, $dat_value, $type, $mode, $hight1, $length)
   }
 
   if ($length == "255") {
-    $length = "maxlength='255'";
+    $length = "";
   }
 
 
@@ -6325,7 +6359,7 @@ function  DP($D1)
   echo "******" . $D1 . "*****<br>";
 }
 
-function  STOPTANI($D1)
+function  STOP($D1)
 {
   echo ">>>" . $D1 . "<<<";
   exit;
@@ -6403,9 +6437,12 @@ function login()
         <?php
 
 
-        btn_submit("ログイン", "", "");
+        btn_submit2("ログイン", "", "");
 
         btn_return("forgetpass.php", "パスワード忘れた場合");
+
+
+        echo "</form>";
         ?>
       </div>
 
@@ -6490,7 +6527,14 @@ function mein_menu()
     <td></td>
     <td></td>
     </tr>
-    <!-- Comment out after the implemntation 
+    
+    
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。
+    
     <tr>
 
       <td class="text-center"> <a type="button" class="btn btn-secondary w-200px" href="common/status_clear.php?mode=0">未作成にする</a></td>
@@ -6505,6 +6549,13 @@ function mein_menu()
       <td class="text-center"></td>
     </tr>
     -->
+    
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    <!--ここはデバックです。-->
+    
+    
     <!-- Comment out after the implemntation -->
 
   </table>

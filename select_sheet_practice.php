@@ -297,54 +297,7 @@ $dis = "";
 
 
 
-      <?php $cnt = tbl_assignment_check($_SESSION['STUDENT_NUMBER'], "アドバンス・クラス実習"); ?>
-      <tr>
-        <td class="text-center"><span class="fw600">アドバンス・クラス実習</span></td>
-        <td class="text-center"><span class="fw600"><?php echo $法人名; ?></span></td>
-        <td class="text-center"><span class="fw600"><?php echo $施設名; ?></span></td>
-        <?php
-        if ($cnt > 0) {
-        ?>
-
-
-          <td class="text-center text-Danger">
-            <?php
-            echo $mr[$sta_sadv];
-            ?>
-          </td>
-
-          <td class="text-center">
-            <form action='sheet_practice_plan.php' method='post'>
-              <input type='hidden' name='title' value="アドバンス・クラス実習">
-              <input type='hidden' name='column' value="sch_advance">
-              <input type='hidden' name='student_number' value="<?PHP echo $value['student_number']; ?>">
-              <input type='hidden' name='name' value="<?PHP echo $value['name']; ?>">
-              <button type='submit' class='btn btn-success' <?PHP echo $dis; ?>>詳細</button>
-            </form>
-          </td>
-
-
-          <td class="text-center text-Danger"><?php echo $mr[$sta_jadv]; ?></td>
-          <td class="text-center">
-            <form action='sheet_self_assessment.php' method='post'>
-              <input type='hidden' name='title' value="アドバンス・クラス実習">
-              <input type='hidden' name='column' value="self_advance">
-              <input type='hidden' name='student_number' value="<?PHP echo $value['student_number']; ?>">
-              <input type='hidden' name='name' value="<?PHP echo $value['name']; ?>">
-              <button type='submit' class='btn btn-success' <?PHP echo $dis; ?>>詳細</button>
-            </form>
-          </td>
-
-
-        <?php
-        } else {
-                  echo "<td></td><td></td><td></td><td><br><br></td>";
-
-        }
-        ?>
-
-      </tr>
-
+      
     </table>
 
 

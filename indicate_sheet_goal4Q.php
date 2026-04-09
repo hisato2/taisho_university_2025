@@ -73,7 +73,7 @@ dsip_koumoku("2-1." . $_SESSION['SEL_SELECT_NEN'] . "年次の学習を通じて
         <tr>
             <td width="15%"><span class="fw600">（対象）</span><br>誰に対して…or<br>何に対して</td>
             <td width="15%"><span class="fw600">（実践フィールド）</span><br>どこで…</td>
-            <td width="15%"><span class="fw600">（職業人たる自己）</span><br>どのような立場で…<br>or どのよなう職種で…</td>
+            <td width="15%"><span class="fw600">（職業人たる自己）</span><br>どのような立場で…<br>or どのような職種で…</td>
             <td width="15%"><span class="fw600">（実践・活動の課題）</span><br>何を…</td>
             <td width="15%"><span class="fw600">（実践・活動の方法）</span><br>どのように…</td>
             <td width="15%"><span class="fw600">（実践・活動において<br>目指す成果）</span><br>…を実現する</td>
@@ -792,10 +792,7 @@ $GLOBALS['sta_go4Q'] = strval($GLOBALS['sta_go4Q']);
 ?>
 
 <?php
-$column = "goal4Q_" . $_SESSION['SEL_SELECT_NEN'];
-
-
-
+    $column = "goal4Q_" . $_SESSION['SEL_SELECT_NEN'];
 ?>
 
 
@@ -809,7 +806,7 @@ $column = "goal4Q_" . $_SESSION['SEL_SELECT_NEN'];
             } else {
                 $dis = "disabled";
             }
-            btn_submit("要修正", "go4Q", $dis);
+            btn_submit("要修正", "fix", $column, $dis);
             ?>
         </td>
 
@@ -820,7 +817,8 @@ $column = "goal4Q_" . $_SESSION['SEL_SELECT_NEN'];
             } else {
                 $dis = "disabled";
             }
-            btn_submit("承認", "go4Q", $dis);
+            btn_submit("承認", "approve", $column, $dis);
+
             ?>
         </td>
         <td>
@@ -832,6 +830,10 @@ $column = "goal4Q_" . $_SESSION['SEL_SELECT_NEN'];
 
 
 <?php
+
+
+echo "</form>";
+
 
 require('./disp_parts/footer.php');
 exit;

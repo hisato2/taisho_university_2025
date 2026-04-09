@@ -691,7 +691,10 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("下書き", $column, $dis);
+      
+       btn_submit("下書き", "draft", $column, $dis);
+
+
       ?>
     </td>
     <td>
@@ -701,7 +704,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("提出", $column, $dis);
+      btn_submit("提出", "submit", $column, $dis);
       ?>
     </td>
 

@@ -273,8 +273,8 @@ $sta = strval($sta);
       } else {
         $dis = "disabled";
       }
+       btn_submit("下書き", "draft", $column, $dis);
 
-      btn_submit("下書き", $column, $dis);
       ?>
     </td>
     <td>
@@ -284,7 +284,7 @@ $sta = strval($sta);
       } else {
         $dis = "disabled";
       }
-      btn_submit("提出", $column, $dis);
+      btn_submit("提出", "submit", $column, $dis);
       ?>
     </td>
 
@@ -295,6 +295,7 @@ $sta = strval($sta);
 </table>
 <?php
 
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

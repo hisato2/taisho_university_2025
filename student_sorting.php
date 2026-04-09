@@ -139,12 +139,13 @@ switch ($_GET['select']) {
     break;
   case 'ref_mental1':
     $_SESSION['SEL_COLUMN'] = "`ref_mental1";
-    $_SESSION['SEL_SHEET_TITLE'] = "精神実習Ⅰ（単独）/インターンシップⅡ";
+    $_SESSION['SEL_SHEET_TITLE'] = "精神実習Ⅰ/インターンシップⅡ";
     header("Location:indicate_sheet_ref_intern.php");
     break;
-  case 'ref_advance':
+  
+    case 'ref_advance':
     $_SESSION['SEL_COLUMN'] = "ref_advance";
-    $_SESSION['SEL_SHEET_TITLE'] = "アドバンス・クラス/精神実習Ⅱ（単独）";
+    $_SESSION['SEL_SHEET_TITLE'] = "精神実習Ⅱ";
     header("Location:indicate_sheet_ref_intern.php");
     break;
 
@@ -173,14 +174,8 @@ switch ($_GET['select']) {
 
     header("Location:indicate_sheet_practice_plan.php");
     break;
-  case 'sch_advance':
-    $_SESSION['SEL_COLUMN'] = "sch_advance";
-    $_SESSION['SEL_SHEET_TITLE'] = "アドバンス・クラス実習";
-
-    header("Location:indicate_sheet_practice_plan.php");
-    break;
-
-
+  
+  
   case 'self_sw1':
 
     $_SESSION['SEL_COLUMN'] = "self_sw1";
@@ -206,11 +201,7 @@ switch ($_GET['select']) {
 
     header("Location:indicate_sheet_self_assessment.php");
     break;
-  case 'self_advance':
-    $_SESSION['SEL_COLUMN'] = "self_advance";
-    $_SESSION['SEL_SHEET_TITLE'] = "アドバンス・クラス実習";
-    header("Location:indicate_sheet_self_assessment.php");
-    break;
+  
 }
 
 

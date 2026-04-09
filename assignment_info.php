@@ -61,9 +61,6 @@ if (!isset($_POST['選択実習種別'])) {
     if ($_POST['選択実習種別']=="精神保健福祉援助実習Ⅱ"){
     $SEl2_4= "selected";    
     }
-    if ($_POST['選択実習種別']=="アドバンス・クラス実習"){
-    $SEl2_5= "selected";    
-    }
 }
 
 
@@ -82,7 +79,6 @@ if (!isset($_POST['選択実習種別'])) {
           <option value="ソーシャルワーク実習Ⅱ" <?php echo $SEl2_2;?>>ソーシャルワーク実習Ⅱ</option>
           <option value="精神保健福祉援助実習Ⅰ" <?php echo $SEl2_3;?>>精神保健福祉援助実習Ⅰ</option>
           <option value="精神保健福祉援助実習Ⅱ" <?php echo $SEl2_4;?>>精神保健福祉援助実習Ⅱ</option>
-          <option value="アドバンス・クラス実習" <?php echo $SEl2_5;?>>アドバンス・クラス実習</option>
           
         </select>
       </h5>

@@ -180,7 +180,7 @@ form_submit("registration.php");
 <table class="table">
   <tr>
     <td>
-      <?php btn_submit("登録", "", ""); ?>
+      <?php btn_submit2("登録", "", ""); ?>
     </td>
     <td>
       <?php btn_return("practice_info.php", "戻る"); ?>
@@ -189,6 +189,9 @@ form_submit("registration.php");
 </table>
 
 <?PHP
+
+
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

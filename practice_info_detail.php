@@ -65,8 +65,6 @@ form_submit("registration.php");
                             $sel3 = "selected";
                         } elseif ($実習種別1 == '精神保健福祉援助実習Ⅱ') {
                             $sel4 = "selected";
-                        } elseif ($実習種別1 == 'アドバンス・クラス実習') {
-                            $sel5 = "selected";
                         } else {
                             $sel0 = "selected";
                         }
@@ -77,7 +75,6 @@ form_submit("registration.php");
                             <option <?php echo $sel2; ?> value="ソーシャルワーク実習Ⅱ"><?PHP echo "ソーシャルワークⅡ"; ?></option>
                             <option <?php echo $sel3; ?> value="精神保健福祉援助実習Ⅰ"><?PHP echo "精神保健福祉援助Ⅰ"; ?></option>
                             <option <?php echo $sel4; ?> value="精神保健福祉援助実習Ⅱ"><?PHP echo "精神保健福祉援助Ⅱ"; ?></option>
-                            <option <?php echo $sel5; ?> value="アドバンス・クラス実習"><?PHP echo "アドバンス・クラス"; ?></option>
                         </select>
 
 
@@ -108,8 +105,6 @@ form_submit("registration.php");
                             $sel3 = "selected";
                         } elseif ($実習種別2 == '精神保健福祉援助実習Ⅱ') {
                             $sel4 = "selected";
-                        } elseif ($実習種別2 == 'アドバンス・クラス実習') {
-                            $sel5 = "selected";
                         } else {
                             $sel0 = "selected";
                         }
@@ -120,7 +115,6 @@ form_submit("registration.php");
                             <option <?php echo $sel2; ?> value="ソーシャルワーク実習Ⅱ"><?PHP echo "ソーシャルワークⅡ"; ?></option>
                             <option <?php echo $sel3; ?> value="精神保健福祉援助実習Ⅰ"><?PHP echo "精神保健福祉援助Ⅰ"; ?></option>
                             <option <?php echo $sel4; ?> value="精神保健福祉援助実習Ⅱ"><?PHP echo "精神保健福祉援助Ⅱ"; ?></option>
-                            <option <?php echo $sel5; ?> value="アドバンス・クラス実習"><?PHP echo "アドバンス・クラス"; ?></option>
                         </select>
     </td>
     <td class="text-left align-middle"><span class="fw600">実習種別2実日数（日）</span></td>
@@ -282,7 +276,7 @@ form_submit("registration.php");
 <table class="table">
   <tr>
     <td>
-      <?php btn_submit("登録","","");?>
+      <?php btn_submit2("登録","","");?>
    </td>
       <td>
       <?php
@@ -290,7 +284,7 @@ form_submit("registration.php");
         IF ($_POST['法人ID']!="9999999999"){
 
 
-              btn_submit("法人削除","削除","");
+              btn_submit2("法人削除","delete","");
 
         }
 
@@ -311,7 +305,7 @@ form_submit("registration.php");
 <?PHP
 
 
-
+echo "</form>";
 
 
 require('./disp_parts/footer.php');

@@ -214,15 +214,6 @@ form_submit("registration.php");
   </tr>
 
 
-
-  <tr>
-    <td><span class="fw600">アドバンス・コース</span></td>
-    <td></td>
-    <td><?php _inputv("advanced_course2", $advanced_course2, "textarea", $dis2, "h80","255"); ?></td>
-    <td><?php _inputv("advanced_course3", $advanced_course3, "textarea", $dis3, "h80","255"); ?></td>
-    <td><?php _inputv("advanced_course4", $advanced_course4, "textarea", $dis4, "h80","255"); ?></td>
-  </tr>
-
   <tr>
     <td><span class="fw600">室友会活動</span></td>
     <td><?php _inputv("roommate_club_activities1", $roommate_club_activities1, "textarea", $dis1, "h80","255"); ?></td>
@@ -283,14 +274,16 @@ form_submit("registration.php");
   </tr>
 
 
-  <tr>
-    <td><span class="fw600">アドバンス実習の実習先</span></td>
-    <td></td>
-    <td><?php _inputv("advanced_training_destination2", $advanced_training_destination2, "textarea", $dis2, "h80","255"); ?></td>
-    <td><?php _inputv("advanced_training_destination3", $advanced_training_destination3, "textarea", $dis3, "h80","255"); ?></td>
-    <td><?php _inputv("advanced_training_destination4", $advanced_training_destination4, "textarea", $dis4, "h80","255"); ?></td>
+<input type='hidden' name='advanced_training_destination1' value="">
+<input type='hidden' name='advanced_training_destination2' value="">
+<input type='hidden' name='advanced_training_destination3' value="">
+<input type='hidden' name='advanced_training_destination4' value="">
 
-  </tr>
+<input type='hidden' name='advanced_course1' value="">
+<input type='hidden' name='advanced_course2' value="">
+<input type='hidden' name='advanced_course3' value="">
+<input type='hidden' name='advanced_course4' value="">
+
 
   <tr>
     <td><span class="fw600">インターンシップ(教科)の<BR>活動内容</span></td>
@@ -327,15 +320,11 @@ form_submit("registration.php");
     <td><?php _inputv("psw_hope4", $psw_hope4, "textarea",  $dis4, "h80","255"); ?></td>
   </tr>
 
-
-  <tr>
-    <td><span class="fw600">アドバンス・コースの履修希望</span></td>
-    <td><?php _inputv("adv_hope1", $adv_hope1, "textarea",  $dis1, "h80","255"); ?></td>
-    <td><?php _inputv("adv_hope2", $adv_hope2, "textarea",  $dis2, "h80","255"); ?></td>
-    <td><?php _inputv("adv_hope3", $adv_hope3, "textarea",  $dis3, "h80","255"); ?></td>
-    <td><?php _inputv("adv_hope4", $adv_hope4, "textarea",  $dis4, "h80","255"); ?></td>
-  </tr>
-
+  
+<input type='hidden' name='adv_hope1' value="">
+<input type='hidden' name='adv_hope2' value="">
+<input type='hidden' name='adv_hope3' value="">
+<input type='hidden' name='adv_hope4' value="">
 
   <tr>
     <td><span class="fw600">配慮を要する事項</span></td>
@@ -347,7 +336,6 @@ form_submit("registration.php");
 
   </tr>
 
-  <?php form_submit("sheet_disp_01.php"); ?>
 
 
   <tr>
@@ -375,6 +363,7 @@ form_submit("registration.php");
 
 <?php
   $GLOBALS['sta_prof']=strval($GLOBALS['sta_prof']);
+  $column="profile_".$_SESSION['SELECT_NEN']
 ?>
 
 
@@ -391,7 +380,7 @@ form_submit("registration.php");
             } else {
                 $dis = "disabled";
             }
-      btn_submit("下書き", "prof", $dis);
+        btn_submit("下書き", "draft", $column, $dis);
       ?>
     </td>
     <td>
@@ -401,7 +390,7 @@ form_submit("registration.php");
             } else {
                 $dis = "disabled";
             }
-      btn_submit("提出", "prof", $dis);
+      btn_submit("提出", "submit", $column, $dis);
       ?>
     </td>
 
@@ -411,6 +400,9 @@ form_submit("registration.php");
   </tr>
 </table>
 <?php
+
+
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

@@ -1399,7 +1399,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("要修正", "rbas", $dis);
+      btn_submit("要修正", "fix", $column, $dis);
       ?>
     </td>
 
@@ -1411,7 +1411,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("承認", "rbas", $dis);
+      btn_submit("承認", "approve", $column, $dis);
       ?>
     </td>
     <td>
@@ -1423,6 +1423,9 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
 
 
 <?php
+
+echo "</form>";
+
 require('./disp_parts/footer.php');
 exit;
 ?>

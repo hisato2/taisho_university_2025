@@ -14,12 +14,23 @@ require_once('../../files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 
+$_POST['ID'] = $_POST['ID'] ?? $_SESSION['ID'] ?? "";
+$_SESSION['ID'] = $_POST['ID'];
+
+$_POST['TABLE_NAME'] = $_POST['TABLE_NAME'] ?? $_SESSION['TABLE_NAME'] ?? "";
+$_SESSION['TABLE_NAME'] = $_POST['TABLE_NAME'];
+
+$_POST['TABLE_TITLE'] = $_POST['TABLE_TITLE'] ?? $_SESSION['TABLE_TITLE'] ?? "";
+$_SESSION['TABLE_TITLE'] = $_POST['TABLE_TITLE'];
+
+
 
 if (!isset($_POST['ID'])) {
   $_POST['ID']=$_SESSION['ID'];
 }ELSE{
   $_SESSION['ID'] = $_POST['ID'];
 }
+
 
 
 
@@ -221,7 +232,7 @@ tbl_TABLE_READ($TABLE_NAME, $ID, $aryColumn, $colcount, $coldat);
     </td>
 
     <td>
-      <?php btn_submit("変更/削除実行", "", ""); ?>
+      <?php btn_submit2("変更/削除実行", "", ""); ?>
     </td>
 
 
@@ -234,7 +245,7 @@ tbl_TABLE_READ($TABLE_NAME, $ID, $aryColumn, $colcount, $coldat);
 <?PHP
 
 
-
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

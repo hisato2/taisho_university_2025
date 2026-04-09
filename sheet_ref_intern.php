@@ -62,7 +62,7 @@ switch ($_POST['SHEET_TITLE']) {
     break;
 
 
-  case "精神実習Ⅰ（単独）/インターンシップⅡ":
+  case "精神実習Ⅰ/インターンシップⅡ":
     tbl_goal_sheet_1q_READ($student_number, 3);
     $column = "ref_mental1";
     $staus = $GLOBALS['sta_rmental1'];
@@ -70,7 +70,7 @@ switch ($_POST['SHEET_TITLE']) {
     break;
 
 
-  case "アドバンス・クラス/精神実習Ⅱ（単独）":
+  case "精神実習Ⅱ":
     tbl_goal_sheet_1q_READ($student_number, 4);
     $column = "ref_advance";
     $staus = $GLOBALS['sta_radv'];
@@ -752,7 +752,7 @@ $staus = strval($staus);
       } else {
         $dis = "disabled";
       }
-      btn_submit("下書き", $column, $dis);
+        btn_submit("下書き", "draft", $column, $dis);
       ?>
     </td>
     <td>
@@ -762,7 +762,7 @@ $staus = strval($staus);
       } else {
         $dis = "disabled";
       }
-      btn_submit("提出", $column, $dis);
+      btn_submit("提出", "submit", $column, $dis);
       ?>
     </td>
 
@@ -774,6 +774,8 @@ $staus = strval($staus);
 
 
 <?php
+
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

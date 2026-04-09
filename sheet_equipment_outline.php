@@ -393,7 +393,8 @@ dsip_midashi("実習施設・機関の概要");
   <tr>
   <tr>
     <td>
-      <?php btn_submit("実習施設・機関の概要登録", "", ""); ?>
+      <?php btn_submit2("実習施設・機関の概要登録", "update", ""); ?>
+      
     </td>
     <td>
       <?php btn_return("sheet_equipment_outline_list.php", "戻る"); ?>
@@ -410,9 +411,9 @@ dsip_midashi("実習施設・機関の概要");
 
 <?php
 
+
+echo "</form>";
+
 require('./disp_parts/footer.php');
-
-
-
 exit;
 ?>

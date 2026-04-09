@@ -1,4 +1,9 @@
 <?php
+
+
+
+
+
 session_start();
 if (!isset($_SESSION['EMAIL'])) {
   header("Location: index.php");
@@ -12,6 +17,78 @@ function h($s)
 }
 
 require_once('../../files/config_db_taisho2025.php');
+
+
+
+
+
+
+if (isset($_POST['download_csv'])) {
+  try {
+    // DBへ接続
+    $dbh = new PDO(DSN, DB_USER, DB_PASS);
+    $dbh->exec("SET NAMES utf8");
+
+    // SQL作成
+    $sql = "SELECT " .
+      "p.student_number, p.name, r.school_year, " .
+  "r.score1Q1, " .
+  "r.score1Q4, " .
+  "r.score2Q1, " .
+  "r.score2Q4, " .
+  "r.score3Q1, " .
+  "r.score3Q4, " .
+  "r.score4Q1, " .
+  "r.score4Q4, " .
+  "r.score5Q1, " .
+  "r.score5Q4 " .
+      "FROM tbl_profile AS p " .
+      "INNER JOIN tbl_reflection_base AS r " .
+      "ON p.student_number = r.student_number;";
+
+    $stmt = $dbh->query($sql);
+    if (!$stmt) {
+      throw new Exception("データの取得に失敗しました。");
+    }
+
+
+    // CSV出力用ヘッダー
+header('Content-Type: text/csv; charset=UTF-8');
+header('Content-Disposition: attachment; filename="score_export.csv"');
+
+$output = fopen('php://output', 'w');
+
+// ▼ UTF-8 BOM を出力（Excel対策）
+fwrite($output, chr(0xEF) . chr(0xBB) . chr(0xBF));
+
+// ヘッダー行
+$headers = array_keys($stmt->fetch(PDO::FETCH_ASSOC));
+fputcsv($output, $headers);
+$stmt->execute(); // 再実行
+
+// データ行
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+  fputcsv($output, $row);
+}
+
+
+    fclose($output);
+    exit;
+
+  } catch (PDOException $e) {
+    echo 'DBエラー: ' . htmlspecialchars($e->getMessage());
+    exit;
+  } catch (Exception $e) {
+    echo 'エラー: ' . htmlspecialchars($e->getMessage());
+    exit;
+  }
+}
+
+
+
+
+
+
 require_once('./common/function.php');
 require('./disp_parts/headerNonlist.php');
 
@@ -30,7 +107,9 @@ $Wstudent = "";
 $NEN = "";
 
 
-
+ // DB接続とSQL → CSV出力 → exit;
+  // DB接続とSQL → CSV出力 → exit;
+   // DB接続とSQL → CSV出力 → exit;
 
 
 if (!isset($_GET['admission'])){
@@ -490,11 +569,11 @@ try {
 
 
           if ($sta_ref_mental1 > 0) {
-            echo "精神実習Ⅰ(単)/ｲﾝﾀｰﾝｼｯﾌﾟⅡ:<a href='student_sorting.php?select=ref_mental1&no=" . $no . "'>"  . $mr[$sta_ref_mental1] . "</a><br>";
+            echo "精神実習Ⅰ/ｲﾝﾀｰﾝｼｯﾌﾟⅡ:<a href='student_sorting.php?select=ref_mental1&no=" . $no . "'>"  . $mr[$sta_ref_mental1] . "</a><br>";
           }
 
           if ($sta_ref_advance > 0) {
-            echo "ｱﾄﾞﾊﾞﾝｽ・ｸﾗｽ/精神実習Ⅱ(単):<a href='student_sorting.php?select=ref_advance&no=" . $no . "'>"  . $mr[$sta_ref_advance] . "</a><br>";
+            echo "精神実習Ⅱ:<a href='student_sorting.php?select=ref_advance&no=" . $no . "'>"  . $mr[$sta_ref_advance] . "</a><br>";
           }
 
 
@@ -529,10 +608,6 @@ try {
           }
 
 
-          if ($sta_sch_advance > 0) {
-            echo "ｱﾄﾞﾊﾞﾝｽ・ｸﾗｽ:<a href='student_sorting.php?select=sch_advance&no=" . $no . "'>"  . $mr[$sta_sch_advance] . "</a><br>";
-          }
-
 
           ?>
 
@@ -558,11 +633,6 @@ try {
 
           if ($sta_self_mental2 > 0) {
             echo "精神実習Ⅱ:<a href='student_sorting.php?select=self_mental2&no=" . $no . "'>"  . $mr[$sta_self_mental2] . "</a><br>";
-          }
-
-
-          if ($sta_self_advance > 0) {
-            echo "ｱﾄﾞﾊﾞﾝｽ・ｸﾗｽ:<a href='student_sorting.php?select=self_advance&no=" . $no . "'>"  . $mr[$sta_self_advance] . "</a><br>";
           }
 
 
@@ -609,8 +679,15 @@ try {
   <table class="table">
     <tr>
       <td>
-        <?php btn_return("index.php", "戻る"); ?>
+        <?php btn_return("index.php", "戻る");?>
       </td>
+
+      <td>
+        <br><br> 
+      <form method="post">
+        <button type='submit'  class='btn btn-secondary w-200px' name="download_csv">自己採点ダウンロード</button>
+      </form>
+
     </tr>
   </table>
 

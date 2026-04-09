@@ -154,20 +154,6 @@ if ($column == "self_mental2") {
   $評価項目12 = SWLF_MENTAL2_12;
 }
 
-if ($column == "self_advance") {
-  $評価項目1 = SWLF_ADV_01;
-  $評価項目2 = SWLF_ADV_02;
-  $評価項目3 = SWLF_ADV_03;
-  $評価項目4 = SWLF_ADV_04;
-  $評価項目5 = SWLF_ADV_05;
-  $評価項目6 = SWLF_ADV_06;
-  $評価項目7 = SWLF_ADV_07;
-  $評価項目8 = SWLF_ADV_08;
-  $評価項目9 = SWLF_ADV_09;
-  $評価項目10 = SWLF_ADV_10;
-  $評価項目11 = SWLF_ADV_11;
-  $評価項目12 = SWLF_ADV_12;
-}
 
 
 $総合評価項目 = "総合評価（上記の評価を踏まえて、評定すること）";
@@ -600,7 +586,7 @@ $sta = strval($sta);
       } else {
         $dis = "disabled";
       }
-      btn_submit("要修正", $column, $dis);
+           btn_submit("要修正", "fix", $column, $dis);
       ?>
     </td>
 
@@ -612,7 +598,7 @@ $sta = strval($sta);
       } else {
         $dis = "disabled";
       }
-      btn_submit("承認", $column, $dis);
+      btn_submit("承認", "approve", $column, $dis);
       ?>
     </td>
     <td>
@@ -623,6 +609,9 @@ $sta = strval($sta);
 </table>
 
 <?php
+
+
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

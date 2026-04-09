@@ -168,7 +168,7 @@ form_submit("registration.php");
       <input type='hidden' name='TABLE' value="tbl_nendo">
       <input type='hidden' name='METHOD' value="UP_DATE">
 
-      <?php btn_submit("年度更新", "年度更新", ""); ?>
+      <?php btn_submit2("年度更新", "年度更新", ""); ?>
 
     </td>
     <td class="text-center">
@@ -178,6 +178,8 @@ form_submit("registration.php");
 </table>
 
 <?PHP
+
+echo "</form>";
 
 
 require('./disp_parts/footer.php');

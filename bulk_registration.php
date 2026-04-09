@@ -5,16 +5,9 @@ if (!isset($_SESSION['EMAIL'])) {
   exit;
 }
 
-function h($s)
-{
+function h($s){
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
-
-
-if (!isset($_POST['SQL_DATA'])){
-    $_POST['SQL_DATA']="";
-}
-
 
 require_once('../../files/config_db_taisho2025.php');
 require_once('./common/function.php');
@@ -23,224 +16,184 @@ $ACTION="index.php";
 
 require('./disp_parts/header.php');
 
-
 dsip_midashi("学生情報一括登録");
 
 
+// ============================
+// 初期化
+// ============================
+$stdn = array_fill(0,70,"");
+$name = array_fill(0,70,"");
+$emai = array_fill(0,70,"");
+$pass = array_fill(0,70,"");
+$kubun = array_fill(0,70,"");
 
-if (isset($_POST['mode']) and (strlen($_POST['SQL_DATA']))>92) {
+$bulk_data = $_POST['bulk_data'] ?? "";
+$mode = $_POST['mode'] ?? "";
 
 
-  if ($_POST['mode'] == "INSERT") {
-    $str_csv = $_POST['SQL_DATA'];
+// ============================
+// 読み込み
+// ============================
+if ($mode === "bulk_data") {
 
-    $pdo = new PDO(DSN, DB_USER, DB_PASS);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    try {
-     
-      $stmt = $pdo->prepare($str_csv);
+  $lines = explode("\n", $bulk_data);
+
+  foreach ($lines as $i => $line) {
+
+    $line = trim($line);
+    if ($line === "") continue;
+
+    $cols = explode(",", $line);
+
+    $stdn[$i]  = $cols[0] ?? "";
+    $name[$i]  = $cols[1] ?? "";
+    $emai[$i]  = $cols[2] ?? "";
+    $pass[$i]  = $cols[3] ?? "";
+    $kubun[$i] = trim($cols[4] ?? "");
+  }
+}
+
+
+// ============================
+// 登録処理
+// ============================
+if ($mode === "INSERT") {
+
+  $pdo = new PDO(DSN, DB_USER, DB_PASS);
+  $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+  try {
+
+    $sql = $_POST['SQL_DATA'] ?? "";
+
+    if ($sql !== "") {
+      $stmt = $pdo->prepare($sql);
       $stmt->execute();
-    } catch (\Exception $e) {
-      
-
-      dsip_msg("学籍番号、あるいはメールアドレスが重複している可能性があります<br>".$e->getMessage());
-      btn_return("bulk_registration.php","戻る");
-      exit;
-
-
     }
 
+    dsip_msg("登録しました");
+    btn_return("index.php","戻る");
+    exit;
 
-      dsip_msg("追加しました");
-      btn_return("index.php","戻る");
-      exit;
+  } catch (Exception $e) {
 
-
+    dsip_msg("エラー<br>".$e->getMessage());
+    btn_return("bulk_registration.php","戻る");
+    exit;
   }
-
 }
 
 
-
-
-$stdn = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-$name = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-$emai = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-$pass = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-$kubun = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-
-$kubun2 = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '','', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
-
-
-if (isset($_POST['mode'])) {
-
-
-
-  if ($_POST['mode'] == "bulk_data") {
-    $str_csv = $_POST['bulk_data'];
-    // カンマ区切りのデータを配列にする
-    $fruits = explode("\n", $str_csv);
-
-    $cnt = count($fruits);
-
-
-    for ($i = 0; $i < $cnt; $i++) {
-
-      $str_csv = $fruits[$i];
-      $koumoki = explode(",", $str_csv);
-
-      if (isset($koumoki[0])) {
-        $stdn[$i]  = $koumoki[0];
-      }
-      if (isset($koumoki[1])) {
-        $name[$i]  = $koumoki[1];
-      }
-      if (isset($koumoki[2])) {
-        $emai[$i]  = $koumoki[2];
-      }
-      if (isset($koumoki[3])) {
-        $pass[$i]  = $koumoki[3];
-      }
-      if (isset($koumoki[4])) {
-        $kubun[$i]  = trim($koumoki[4]);
-      }
-    }
-  }
-
-
-  if ($_POST['mode'] == "clier") {
-    $str_csv = "";
-    // カンマ区切りのデータを配列にする
-    
-
-    $cnt = 70;
-
-    for ($i = 0; $i < $cnt; $i++) {
-
-      $str_csv = "";
-      $koumoki = "";
-      $stdn[$i]  = "";
-      $name[$i]  = "";
-      $emai[$i]  ="";
-      $pass[$i]  ="";
-    }
-  }
-
-
-
-
+// ============================
+// 初期化
+// ============================
+if ($mode === "clear") {
+  $bulk_data = "";
 }
 
-//////////何年度の表の提出状況を表示するか
 
-
+// ============================
+// form開始
+// ============================
 form_submit("bulk_registration.php");
 ?>
-<table class="table">
-  <tr>
-    <td class="text-center align-middle bg-primary2">
-      <span class="fw600">①CSV形式でリストを作成する<br>②CSVファイルをメモ帳で開く<br>③メモ帳で開いた内容を左の枠にコピー＆ペーストする<br></span>
-      <span class="fw600">④学生の場合は区分を「学生」、<br>教員・事務局の場合は区分を「教員」とする</span>
-    </td>
-    <td>
-      <div class="input-group mb-0">
-        <textarea class="form-control" rows="10" cols="60" name="bulk_data"></textarea>
-      </div>
-    </td>
-  </tr>
-</table>
 
 <table class="table">
-  <tr>
-    <td>
-      <div class="text-center" style="height:100px">
-        <button type='submit' class='btn btn-secondary w-200px'>読み込む</button>
-        <input type='hidden' name='mode' value="bulk_data">
-        </form>
-      </div>
-    </td>
-  </tr>
+<tr>
+<td class="text-center align-middle bg-primary2">
+CSVを貼り付け
+</td>
+<td>
+<textarea class="form-control" rows="10" name="bulk_data"><?=h($bulk_data)?></textarea>
+</td>
+</tr>
 </table>
 
+<div class="text-center">
+<button type="submit" name="mode" value="bulk_data" class="btn btn-secondary">
+読み込む
+</button>
+
+<button type="submit" name="mode" value="clear" class="btn btn-warning">
+初期化
+</button>
+</div>
+
+<hr>
+
+
+<!-- ============================
+表示＋SQL生成
+============================ -->
 <table class="table table-bordered border-secondary">
-  <tr>
+<tr>
+<td><span class="fw600">学籍番号</span></td>
+<td><span class="fw600">氏名</span></td>
+<td><span class="fw600">メールアドレス</span></td>
+<td><span class="fw600">仮パスワード</span></td>
+<td><span class="fw600">区分</span></td>
+</tr>
 
-    <td><span class="fw600">学籍番号</span></td>
-    <td><span class="fw600">氏名</span></td>
-    <td><span class="fw600">メールアドレス</span></td>
-    <td><span class="fw600">仮パスワード</span></td>
-    <td><span class="fw600">区分</span></td>
-  </tr>
-  <?php
+<?php
 
-  $sql = "INSERT INTO `tbl_profile` (`student_number`, `name`, `email`, `password`, `kubun`) VALUES ";
 
-  for ($i = 0; $i < 70; $i++) {
-    if ($i > 0) {
+$sql = "INSERT INTO `tbl_profile` (`student_number`, `name`, `email`, `password`, `kubun`) VALUES ";
+$first = true;
 
-      if ($stdn[$i] != "") {
-        $sql = $sql . ",";
-      }
+for ($i = 0; $i < 70; $i++) {
+
+  echo "<tr height='26px'>";
+  echo "<td>" . h($stdn[$i]) . "</td>";
+  echo "<td>" . h($name[$i]) . "</td>";
+  echo "<td>" . h($emai[$i]) . "</td>";
+  echo "<td>" . h($pass[$i]) . "</td>";
+  echo "<td>" . h($kubun[$i]) . "</td>";
+  echo "</tr>";
+
+  if ($stdn[$i] != "") {
+
+    if (!$first) {
+      $sql .= ",";
     }
 
-    echo "<tr height='26px'>";
-    echo  "<td>" . $stdn[$i] . "</td>";
-    echo  "<td>" . $name[$i] . "</td>";
-    echo  "<td>" . $emai[$i] . "</td>";
-    echo  "<td>" . $pass[$i] . "</td>";
-    echo  "<td>" . $kubun[$i] . "</td>";
-    echo "</tr>";
+    $sql .= "('"
+      . $stdn[$i] . "','"
+      . $name[$i] . "','"
+      . $emai[$i] . "','"
+      . $pass[$i] . "','"
+      . $kubun[$i]
+      . "')";
 
-    if ($stdn[$i] != "") {
-      $sql = $sql . "('" . $stdn[$i] . "','" . $name[$i] . "','" . $emai[$i] . "','" . $pass[$i] . "','" . $kubun[$i]."')";
-    }
+    $first = false;
   }
-  $sql = $sql . ";";
+}
+
+// ★ここを変更（セミコロン削除してこれに置換）
+$sql .= " ON DUPLICATE KEY UPDATE 
+name=VALUES(name),
+email=VALUES(email),
+password=VALUES(password),
+kubun=VALUES(kubun);";
+
+echo "</table>";
+?>
 
 
-  echo "</table>";
+<!-- SQL送信用 -->
+<input type="hidden" name="SQL_DATA" value="<?=h($sql)?>">
 
+<hr>
 
-  form_submit("bulk_registration.php");
+<div class="text-center">
+<button type="submit" name="mode" value="INSERT" class="btn btn-primary">
+一括登録
+</button>
+</div>
 
+<?php
+echo "</form>";
 
-  
-
-  ?>
-
-
-  <input type='hidden' name='SQL_DATA' value="<?php echo $sql; ?>">
-  <input type='hidden' name='mode' value="INSERT">
-
-  
-
-  <table class="table">
-    <tr>
-
-      <td>
-        <?php btn_submit("一括登録","","登録");?>
-      </td>
-
-
-
-      <?php form_submit("bulk_registration.php");?>
-      <input type='hidden' name='mode' value="clear">
-
-      <td>
-  
-      
-
-      <?php btn_submit("初期化","","初期化");?>
-      </td>
-
-
-      <td>
-        <?php btn_return("index.php", "戻る"); ?>
-      </td>
-    </tr>
-  </table>
-
-  <?PHP
-  require('./disp_parts/footer.php');
-  exit;
-  ?>
+require('./disp_parts/footer.php');
+exit;
+?>

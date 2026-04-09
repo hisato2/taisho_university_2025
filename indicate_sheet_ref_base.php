@@ -15,8 +15,20 @@ require_once('./common/function.php');
 
 $ACTION = "student_list.php";
 
-require('./disp_parts/headerNonlist.php');
+require('./disp_parts/headerNonlistS.php');
+?>
+<style>
+  input[type="radio"] {
+    pointer-events: none;
+    /* クリック不可にする */
+  }
+</style>
+<?PHP
 require('data_keep.php');
+
+// スコア値（これはどこかで渡ってくる前提）
+
+
 
 
 if (!isset($_SESSION['NAME'])) {
@@ -79,7 +91,7 @@ $sta = $GLOBALS['sta_jadv'];
 
 
 tbl_profile_READ($_SESSION['SEL_STUDENT_NUMBER']);
-dsip_midashi("学修行動計画（リフレクション・シート）＜" . $_SESSION['SEL_SELECT_NEN'] . "年次＞(４Q)（" . $name . "）");
+dsip_midashi("学修行動計画（リフレクション・シート）＜" . $_SESSION['SEL_SELECT_NEN'] . "年次＞（" . $name . "）");
 
 
 
@@ -325,7 +337,17 @@ $ref_base_fields = [
   '今後目標5_1Q',
   '今後目標5_4Q',
   '今後課題5_1Q',
-  '今後課題5_4Q'
+  '今後課題5_4Q',
+  'score1Q1',
+  'score1Q4',
+  'score2Q1',
+  'score2Q4',
+  'score3Q1',
+  'score3Q4',
+  'score4Q1',
+  'score4Q4',
+  'score5Q1',
+  'score5Q4'    
 ];
 
 foreach ($ref_base_fields as $field) {
@@ -336,6 +358,15 @@ foreach ($ref_base_fields as $field) {
 
 
 
+
+
+
+$labels = [
+  4 => "４. 十分達成できた",
+  3 => "３. やや達成できた",
+  2 => "２.あまり達成できなかった",
+  1 => "１.全く達成できなかった"
+];
 
 
 
@@ -395,38 +426,56 @@ form_submit("registration.php");
     <td width="5%" rowspan="2" class="changing-line text-center text-middle color_td1">
       <span class="fw600">年次</span>
     </td>
-    <td width="15%" rowspan="2" class='changing-line text-middle color_td1'>
+
+
+    <td width="11%" rowspan="2" class='changing-line text-middle color_td1'>
       <span class="fw600">1.共通の到達目標</span>
     </td>
-    <td width="15%" rowspan="2" class='changing-line text-middle color_td1'>
+
+
+    <td width="11%" rowspan="2" class='changing-line text-middle color_td1'>
       <span class="fw600">2.「共通の到達目標」を踏まえた、あなたの到達目標</span>
     </td>
-
-    <td colspan="4" class="changing-line text-center text-middle color_td1">
+    <td colspan="5" class="changing-line text-center text-middle color_td1">
       <span class="fw600">3.学修行動の振り返り</span>
     </td>
 
-    <td width="15%" rowspan="2" class='changing-line text-middle color_td4'>
+    <td width="11%" rowspan="2" class='changing-line text-middle color_td4'>
       <span class="fw600">4.3.の振り返りを踏まえた「あなたの到達目標」</span>
+      <br><span class="fs80"></span>
     </td>
-    <td width="15%" rowspan="2" class='changing-line text-middle color_td4'>
-      <span class="fw600">5.「あなたの到達目標」達成に向けて、次のクォータまでに、あなたがさらにやること、努力すること</span>
+    <td width="11%" rowspan="2" class='changing-line text-middle color_td4'>
+      <span class="fw600">5.「あなたの到達目標」達成に向けて、次のクォーターまでに、あなたがさらにやること、努力すること</span><br>
+      <span class="fs80"></span>
     </td>
   </tr>
 
+
   <tr style="border: 1px solid #fff">
-    <td width="8.7%" class='changing-line text-middle color_td1'>
+
+
+    <td width="11%" class='changing-line text-middle color_td1'>
       <span class="fw600">①.共通の目標達成度評価(評価基準表に基づき自己評価)</span>
+      <br><span class="fs80"></span>
     </td>
-    <td width="8.7%" class='changing-line text-middle color_td1'>
+
+
+
+    <td class='changing-line text-middle color_td1'>
+      <span class="fw600">①の自己評価点</span>
+      <br><span class="fs80"></span>
+    </td>
+
+
+    <td width="11%" class='changing-line text-middle color_td1'>
       <span class="fw600">②.①に関して、あなたが獲得できたこと、達成できたこと、できるようになったこと（2.「あなたの達成目標」に関連付けて記述）</span>
+      <br><span class="fs80"></span>
     </td>
-    <td width="8.7%" class='changing-line text-middle color_td1'>
-      <span class="fw600">③.①に関して、達成・獲得に至らなかったこと（「2.あなたの達成目標」に関連付けて記述）</span>
+    <td width="11%" class='changing-line text-middle color_td1'>
+      <span class="fw600">③ あなたの到達目標の達成に必要な力（1Qゴールシートであなたが獲得目標として設定した力）</span>
     </td>
-    <td width="8.7%" class='changing-line text-middle color_td1'>
+    <td width="11%" class='changing-line text-middle color_td1'>
       <span class="fw600">④ ③で掲げた獲得目標の達成度評価
-        <!-- （③の力を用いて、できるようになったこと/できなかったこと、向上した技能/獲得に至らなかった技能、新たに始めた活動、学修が進んだこと/学修が進まなかったこと、などを振り返りながら、「その力がどの程度発揮されたか/発揮されなかったか」という観点で自己評価してください。） -->
         <span class="fs80">（50字以上）</span>
     </td>
   </tr>
@@ -449,6 +498,24 @@ form_submit("registration.php");
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来た1", $出来た1, "textarea", "", "h200", "255"); ?>
     </td>
+
+
+    <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+      <div>
+        <?php foreach ($labels as $val => $text): ?>
+          <?php if ($score1Q1 == $val): ?>
+            <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+          <?php else: ?>
+            <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+          <?php endif; ?>
+          <br><br>
+        <?php endforeach; ?>
+      </div>
+
+    </td>
+
+
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来ず1", $出来ず1, "textarea", "", "h200", "255"); ?>
     </td>
@@ -504,6 +571,21 @@ form_submit("registration.php");
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
       <?php echo  $出来た1; ?>
     </td>
+    <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score1Q4 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+
+    </td>
+
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
       <?php echo $出来ず1; ?>
     </td>
@@ -580,6 +662,22 @@ form_submit("registration.php");
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来た2", $出来た2, "textarea", "", "h200", "255"); ?>
     </td>
+
+    <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+     
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score2Q1 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+    </td>
+
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来ず2", $出来ず2, "textarea", "", "h200", "255"); ?>
     </td>
@@ -629,13 +727,30 @@ form_submit("registration.php");
       <?php echo $study_target02; ?>
     </td>
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo $自己目標2; ?>
+      <?php echo $自己目標2; ?>
     </td>
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo $出来た2; ?>
+      <?php echo $出来た2; ?>
     </td>
+
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo  $出来ず2; ?>
+
+    
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score2Q4 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+
+    </td>
+
+    <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+      <?php echo  $出来ず2; ?>
     </td>
 
 
@@ -695,6 +810,23 @@ form_submit("registration.php");
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来た3", $出来た3, "textarea", "", "h200", "255"); ?>
     </td>
+
+    <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+     
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score3Q1 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+
+    </td>
+
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来ず3", $出来ず3, "textarea", "", "h200", "255"); ?>
     </td>
@@ -749,8 +881,25 @@ form_submit("registration.php");
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
       <?php echo  $出来た3; ?>
     </td>
+
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo  $出来ず3; ?>
+
+   
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score3Q4 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+
+    </td>
+
+    <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+      <?php echo  $出来ず3; ?>
     </td>
 
 
@@ -811,6 +960,20 @@ form_submit("registration.php");
       <?php _inputv("出来た4", $出来た4, "textarea", "", "h200", "255"); ?>
     </td>
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+<div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score4Q1 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+    </td>
+
+    <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
       <?php _inputv("出来ず4", $出来ず4, "textarea", "", "h200", "255"); ?>
     </td>
     <td class='changing-line color_td1 wbr' style="vertical-align: top;">
@@ -855,18 +1018,33 @@ form_submit("registration.php");
     <td rowspan='4' class='changing-line text-middle color_td4'>
       <span class='fw600 text-center'><?php echo h($_SESSION['SEL_SELECT_NEN']); ?>年次<br>(3Q/4Q)</span>
     </td>
-    
+
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
       <?php echo $study_target04; ?>
     </td>
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo $自己目標4; ?>
+      <?php echo $自己目標4; ?>
     </td>
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo  $出来た4; ?>
+      <?php echo  $出来た4; ?>
     </td>
+
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      <?php  echo  $出来ず4; ?>
+
+ <div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score4Q4 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+    </td>
+
+    <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+      <?php echo  $出来ず4; ?>
     </td>
 
 
@@ -933,6 +1111,20 @@ form_submit("registration.php");
         <?php _inputv("出来た5", $出来た5, "textarea", "", "h200", "255"); ?>
       </td>
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+    <div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score5Q1 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+      </td>
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず5", $出来ず5, "textarea", "", "h200", "255"); ?>
       </td>
       <td class='changing-line color_td1 wbr' style="vertical-align: top;">
@@ -980,16 +1172,30 @@ form_submit("registration.php");
 
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-        <?php echo $study_target05;?>
+        <?php echo $study_target05; ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-        <?php  echo  $自己目標5; ?>
+        <?php echo  $自己目標5; ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-        <?php  echo $出来た5; ?>
+        <?php echo $出来た5; ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-        <?php  echo $出来ず5; ?>
+
+     <div>
+  <?php foreach ($labels as $val => $text): ?>
+    <?php if ($score5Q4 == $val): ?>
+      <i class="fa-regular fa-circle-check" style="color: blue;"></i> <?= htmlspecialchars($text) ?>
+    <?php else: ?>
+      <i class="fa-regular fa-circle" style="color: gray;"></i> <?= htmlspecialchars($text) ?>
+    <?php endif; ?>
+    <br><br>
+  <?php endforeach; ?>
+</div>
+      </td>
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+        <?php echo $出来ず5; ?>
       </td>
 
 
@@ -1060,6 +1266,18 @@ form_submit("registration.php");
     <input type="hidden" name='今後目標5_4Q' value="">
     <input type="hidden" name='今後課題5_1Q' value="">
     <input type="hidden" name='今後課題5_4Q' value="">
+
+    <input type="hidden" name="score1Q1" value="">
+    <input type="hidden" name="score1Q4" value="">
+    <input type="hidden" name="score2Q1" value="">
+    <input type="hidden" name="score2Q4" value="">
+    <input type="hidden" name="score3Q1" value="">
+    <input type="hidden" name="score3Q4" value="">
+    <input type="hidden" name="score4Q1" value="">
+    <input type="hidden" name="score4Q4" value="">
+    <input type="hidden" name="score5Q1" value="">
+    <input type="hidden" name="score5Q4" value="">
+
   <?php } ?>
 
 </table>
@@ -1086,6 +1304,7 @@ form_submit("registration.php");
 </p>
 <?php
 $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
+$column="rbas"
 ?>
 
 <table class="table">
@@ -1099,7 +1318,9 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("要修正", "rbas", $dis);
+
+      btn_submit("要修正", "fix", $column, $dis);
+
       ?>
     </td>
 
@@ -1111,7 +1332,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("承認", "rbas", $dis);
+      btn_submit("承認", "approve", $column, $dis);
       ?>
     </td>
     <td>
@@ -1123,6 +1344,9 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
 
 
 <?php
+
+
+echo "</form>";
 require('./disp_parts/footer.php');
 exit;
 ?>

@@ -749,9 +749,9 @@ if ($配属人数 == 3) {
   $yyy = $yt + $item["iii_a_AB"]["y"] * $y0;
 
   // 
-  $総額 = $積算日 * $_REQUEST["iii_a_AA"];
+  
 
-
+$総額 = $積算日 * (float)($_REQUEST["iii_a_AA"] ?? 0);
 
   if ($_REQUEST["iii_a_AB"] <> "") {
     $pdf->Text($xxx, $yyy, number_format($総額));
@@ -763,10 +763,11 @@ if ($配属人数 == 3) {
   $xxx = $xl + $item["iii_a_AA"]["x"] * $x0;
   $yyy = $yt + $item["iii_a_AA"]["y"] * $y0;
 
+if (!empty($_REQUEST["iii_a_AA"]) && is_numeric($_REQUEST["iii_a_AA"])) {
 
-  if ($_REQUEST["iii_a_AA"] <> "") {
-    $pdf->Text($xxx, $yyy, number_format($_REQUEST["iii_a_AA"]));
-  }
+    $pdf->Text($xxx, $yyy, number_format((float)$_REQUEST["iii_a_AA"]));
+
+}
 }
 
 
@@ -2179,9 +2180,19 @@ if ($_REQUEST["iii_a_AB"] <> "") {
 
 
 $item["iii_a_AA"]       = array("x" => 23, "y" => 35.6, "size" => 11);
+
+
+
 $pdf->SetFont($font, '', $item["iii_a_AA"]["size"]);
-if ($_REQUEST["iii_a_AA"] <> "") {
-  $pdf->Text($xl + $item["iii_a_AA"]["x"] * $x0, $yt + $item["iii_a_AA"]["y"] * $y0, number_format($_REQUEST["iii_a_AA"]));
+
+$val = $_REQUEST["iii_a_AA"] ?? null;
+
+if (is_numeric($val)) {
+  $pdf->Text(
+    $xl + $item["iii_a_AA"]["x"] * $x0,
+    $yt + $item["iii_a_AA"]["y"] * $y0,
+    number_format((float)$val)
+  );
 }
 
 

@@ -190,13 +190,12 @@ form_submit("registration.php");
     <td width="20%" class="text-center"><span class="fw600">4年次</span></td>
   </tr>
 
-  <tr>
-    <td><span class="fw600">アドバンス・コース</span></td>
-    <td></td>
-    <td><?php _inputv("advanced_course2", $advanced_course2, "text", $dis2, "", "255"); ?></td>
-    <td><?php _inputv("advanced_course3", $advanced_course3, "text", $dis3, "", "255"); ?></td>
-    <td><?php _inputv("advanced_course4", $advanced_course4, "text", $dis4, "", "255"); ?></td>
-  </tr>
+  
+<input type='hidden' name='advanced_course1' value="">
+<input type='hidden' name='advanced_course2' value="">
+<input type='hidden' name='advanced_course3' value="">
+<input type='hidden' name='advanced_course4' value="">
+
 
   <tr>
     <td><span class="fw600">室友会活動</span></td>
@@ -258,14 +257,10 @@ form_submit("registration.php");
   </tr>
 
 
-  <tr>
-    <td><span class="fw600">アドバンス実習の実習先</span></td>
-    <td></td>
-    <td><?php _inputv("advanced_training_destination2", $advanced_training_destination2, "text", $dis2, "", "255"); ?></td>
-    <td><?php _inputv("advanced_training_destination3", $advanced_training_destination3, "text", $dis3, "", "255"); ?></td>
-    <td><?php _inputv("advanced_training_destination4", $advanced_training_destination4, "text", $dis4, "", "255"); ?></td>
-
-  </tr>
+<input type='hidden' name='advanced_training_destination1' value="">
+<input type='hidden' name='advanced_training_destination2' value="">
+<input type='hidden' name='advanced_training_destination3' value="">
+<input type='hidden' name='advanced_training_destination4' value="">
 
   <tr>
     <td><span class="fw600">インターンシップ(教科)の<BR>活動内容</span></td>
@@ -302,14 +297,13 @@ form_submit("registration.php");
     <td><?php _inputv("psw_hope4", $psw_hope4, "text",  $dis4, "", "255"); ?></td>
   </tr>
 
+<input type='hidden' name='adv_hope1' value="">
+<input type='hidden' name='adv_hope2' value="">
+<input type='hidden' name='adv_hope3' value="">
+<input type='hidden' name='adv_hope4' value="">
 
-  <tr>
-    <td><span class="fw600">アドバンス・コースの履修希望</span></td>
-    <td><?php _inputv("adv_hope1", $adv_hope1, "text",  $dis1, "", "255"); ?></td>
-    <td><?php _inputv("adv_hope2", $adv_hope2, "text",  $dis2, "", "255"); ?></td>
-    <td><?php _inputv("adv_hope3", $adv_hope3, "text",  $dis3, "", "255"); ?></td>
-    <td><?php _inputv("adv_hope4", $adv_hope4, "text",  $dis4, "", "255"); ?></td>
-  </tr>
+
+
 
 
   <tr>
@@ -321,9 +315,6 @@ form_submit("registration.php");
     <td><?php _inputv("things_to_consider4", $things_to_consider4, "text",  $dis4, "", "255"); ?></td>
 
   </tr>
-
-  <?php form_submit("sheet_disp_01.php"); ?>
-
 
   <tr>
     <td><span class="fw600">教員からのコメント</span> <span class="fs80"></span></td>
@@ -354,6 +345,7 @@ form_submit("registration.php");
 </p>
 <?php
 $GLOBALS['sta_prof'] = strval($GLOBALS['sta_prof']);
+$column="prof";
 ?>
 
 <table class="table">
@@ -366,7 +358,7 @@ $GLOBALS['sta_prof'] = strval($GLOBALS['sta_prof']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("要修正", "prof", $dis);
+        btn_submit("要修正", "fix", $column, $dis);
       ?>
     </td>
     <td>
@@ -376,7 +368,7 @@ $GLOBALS['sta_prof'] = strval($GLOBALS['sta_prof']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("承認", "prof", $dis);
+      btn_submit("承認", "approve", $column, $dis);
       ?>
     </td>
     <td>
@@ -387,6 +379,9 @@ $GLOBALS['sta_prof'] = strval($GLOBALS['sta_prof']);
 
 
 <?php
+
+echo "</form>";
+
 require('./disp_parts/footer.php');
 exit;
 ?>

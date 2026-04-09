@@ -549,7 +549,7 @@ dsip_midashi("実習生紹介書");
   <tr>
   <tr>
     <td>
-      <?php btn_submit("実習生紹介書登録", "", ""); ?>
+      <?php btn_submit2("実習生紹介書登録", "student_intro_update"); ?>
     </td>
     <td>
       <?php btn_return("index.php", "戻る"); ?>
@@ -563,6 +563,8 @@ dsip_midashi("実習生紹介書");
 
 
 <?php
+
+echo "</form>";
 
 require('./disp_parts/footer.php');
 exit;

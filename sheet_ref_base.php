@@ -1,13 +1,20 @@
+
+
 <?php
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
+
+
 if (!isset($_SESSION['EMAIL'])) {
   header("Location: index.php");
   exit;
 }
+
+
+
 
 function h($s)
 {
@@ -21,7 +28,9 @@ form_submit("registration.php");
 
 $ACTION = "select_sheet.php";
 
-require('./disp_parts/headerNonlist.php');
+require('./disp_parts/headerNonlistS.php');
+
+
 require('data_keep.php');
 
 
@@ -206,6 +215,14 @@ try {
 
 
 
+$labels = [
+  4 => "４. 十分達成できた",
+  3 => "３. やや達成できた",
+  2 => "２.あまり達成できなかった",
+  1 => "１.全く達成できなかった"
+];
+
+
 
 tbl_reflection_base_READ($student_number, $_SESSION['SELECT_NEN']);
 
@@ -353,7 +370,7 @@ $sta = $GLOBALS['sta_jadv'];
 
 tbl_profile_READ($_SESSION['STUDENT_NUMBER']);
 
-dsip_midashi("学修行動計画（リフレクション・シート）＜" . $_SESSION['SELECT_NEN'] . "年次＞(４Q)");
+dsip_midashi("学修行動計画（リフレクション・シート）＜" . $_SESSION['SELECT_NEN'] . "年次＞");
 
 
 tbl_goal_sheet_1q_READ($student_number, $_SESSION['SELECT_NEN']);
@@ -361,9 +378,14 @@ tbl_reflection_base_READ($student_number, $_SESSION['SELECT_NEN']);
 
 if (($GLOBALS['sta_rbas'] == 4) or ($GLOBALS['sta_rbas'] == 2)) {
   $edits = "";
+  
+  $disabled= "disabled";
 } else {
   $edits = "edit";
+  $disabled= "";
 }
+
+
 
 
 switch ($_SESSION['SELECT_NEN']) {
@@ -408,7 +430,18 @@ $自己目標2 = $study_target02;
 $自己目標3 = $study_target03;
 $自己目標4 = $study_target04;
 $自己目標5 = $study_target05;
+
+
+
+
+
+
+
 ?>
+
+
+
+
 
 <table class="table changing-line">
 
@@ -418,21 +451,25 @@ $自己目標5 = $study_target05;
       <td width="5%" rowspan="2" class="changing-line text-center text-middle color_td1">
         <span class="fw600">年次</span>
       </td>
-      <td width="12.2%" rowspan="2" class='changing-line text-middle color_td1'>
+
+
+      <td width="11%" rowspan="2" class='changing-line text-middle color_td1'>
         <span class="fw600">1.共通の到達目標</span>
       </td>
-      <td width="12.2%" rowspan="2" class='changing-line text-middle color_td1'>
+
+
+      <td width="11%" rowspan="2" class='changing-line text-middle color_td1'>
         <span class="fw600">2.「共通の到達目標」を踏まえた、あなたの到達目標</span>
       </td>
-      <td colspan="4" class="changing-line text-center text-middle color_td1">
+      <td colspan="5" class="changing-line text-center text-middle color_td1">
         <span class="fw600">3.学修行動の振り返り</span>
       </td>
 
-      <td width="12.2%" rowspan="2" class='changing-line text-middle color_td4'>
+      <td width="11%" rowspan="2" class='changing-line text-middle color_td4'>
         <span class="fw600">4.3.の振り返りを踏まえた「あなたの到達目標」</span>
         <br><span class="fs80"></span>
       </td>
-      <td width="12.2%" rowspan="2" class='changing-line text-middle color_td4'>
+      <td width="11%" rowspan="2" class='changing-line text-middle color_td4'>
         <span class="fw600">5.「あなたの到達目標」達成に向けて、次のクォーターまでに、あなたがさらにやること、努力すること</span><br>
         <span class="fs80"></span>
       </td>
@@ -440,18 +477,29 @@ $自己目標5 = $study_target05;
 
 
     <tr style="border: 1px solid #fff">
-      <td width="12.2%" class='changing-line text-middle color_td1'>
+
+
+     <td width="11%" class='changing-line text-middle color_td1'>
         <span class="fw600">①.共通の目標達成度評価(評価基準表に基づき自己評価)</span>
         <br><span class="fs80"></span>
       </td>
-      <td width="12.2%" class='changing-line text-middle color_td1'>
+
+    
+
+     <td class='changing-line text-middle color_td1'>
+        <span class="fw600">①の自己評価点</span>
+        <br><span class="fs80"></span>
+      </td>
+
+
+      <td width="11%" class='changing-line text-middle color_td1'>
         <span class="fw600">②.①に関して、あなたが獲得できたこと、達成できたこと、できるようになったこと（2.「あなたの達成目標」に関連付けて記述）</span>
         <br><span class="fs80"></span>
       </td>
-      <td width="12.2%" class='changing-line text-middle color_td1'>
+      <td width="11%" class='changing-line text-middle color_td1'>
         <span class="fw600">③ あなたの到達目標の達成に必要な力（1Qゴールシートであなたが獲得目標として設定した力）</span>
       </td>
-      <td width="12.2%" class='changing-line text-middle color_td1'>
+      <td width="11%" class='changing-line text-middle color_td1'>
         <span class="fw600">④ ③で掲げた獲得目標の達成度評価
           <span class="fs80">（50字以上）</span>
       </td>
@@ -474,6 +522,22 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来た1", $出来た1, "textarea", $edits, "h200", "255"); ?>
       </td>
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+       
+       
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score1Q1" value="<?= $val ?>" <?= ($score1Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+
+        </td>
+
+
+
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず1", $出来ず1, "textarea", $edits, "h200", "255"); ?>
       </td>
@@ -530,6 +594,19 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php  echo $出来た1; ?>
       </td>
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+       
+       
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score1Q4" value="<?= $val ?>" <?= ($score1Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+      </td>
+
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php echo $出来ず1; ?>
       </td>
@@ -608,6 +685,21 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来た2", $出来た2, "textarea", $edits, "h200", "255"); ?>
       </td>
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+      
+          <?php foreach ($labels as $val => $text): ?>
+          <label>
+            <input type="radio" name="score2Q1" value="<?= $val ?>" <?= ($score2Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+            <?= htmlspecialchars($text) ?>
+          </label><br><br>
+        <?php endforeach; ?>
+
+
+
+
+      </td>
+
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず2", $出来ず2, "textarea", $edits, "h200", "255"); ?>
       </td>
@@ -661,6 +753,20 @@ $自己目標5 = $study_target05;
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php echo  $出来た2; ?>
+      </td>
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+      
+      
+ 
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score2Q4" value="<?= $val ?>" <?= ($score2Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php echo  $出来ず2; ?>
@@ -723,6 +829,20 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来た3", $出来た3, "textarea", $edits, "h200", "255"); ?>
       </td>
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+
+
+
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score3Q1" value="<?= $val ?>" <?= ($score3Q1 == $val) ? 'checked' : '' ?>  <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+      </td>
+
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず3", $出来ず3, "textarea", $edits, "h200", "255"); ?>
       </td>
@@ -778,6 +898,24 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php  echo  $出来た3; ?>
       </td>
+
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+        
+      
+      
+
+ <?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score3Q4" value="<?= $val ?>" <?= ($score3Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+      </td>
+
+
+
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php  echo  $出来ず3; ?>
       </td>
@@ -841,6 +979,22 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来た4", $出来た4, "textarea", $edits, "h200", "255"); ?>
       </td>
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+          
+
+ 
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score4Q1" value="<?= $val ?>" <?= ($score4Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+
+      </td>
+
+
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず4", $出来ず4, "textarea", $edits, "h200", "255"); ?>
       </td>
@@ -896,6 +1050,25 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php echo   $出来た4; ?>
       </td>
+
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+       
+      
+
+
+      <?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score4Q4" value="<?= $val ?>" <?= ($score4Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+      </td>
+
+
+      </td>
+
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
         <?php echo  $出来ず4; ?>
       </td>
@@ -965,6 +1138,23 @@ $自己目標5 = $study_target05;
         <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
           <?php _inputv("出来た5", $出来た5, "textarea", $edits, "h200", "255"); ?>
         </td>
+
+
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+        
+      
+
+      
+ <?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score5Q1" value="<?= $val ?>" <?= ($score5Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+
+      </td>
+
         <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
           <?php _inputv("出来ず5", $出来ず5, "textarea", $edits, "h200", "255"); ?>
         </td>
@@ -1020,6 +1210,23 @@ $自己目標5 = $study_target05;
         <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
           <?php echo   $出来た5; ?>
         </td>
+
+
+      <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
+
+      
+      
+<?php foreach ($labels as $val => $text): ?>
+  <label>
+    <input type="radio" name="score5Q4" value="<?= $val ?>" <?= ($score5Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
+    <?= htmlspecialchars($text) ?>
+  </label><br><br>
+<?php endforeach; ?>
+
+
+
+      </td>
+
         <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
           <?php echo   $出来ず5; ?>
         </td>
@@ -1087,6 +1294,18 @@ $自己目標5 = $study_target05;
       <input type="hidden" name='ref5_4Q2' value="">
       <input type="hidden" name='ref5_4Q3' value="">
       <input type="hidden" name='ref5_4Q4' value="">
+
+      <input type="hidden" name="score1Q1" value="">
+      <input type="hidden" name="score1Q4" value="">
+      <input type="hidden" name="score2Q1" value="">
+      <input type="hidden" name="score2Q4" value="">
+      <input type="hidden" name="score3Q1" value="">
+      <input type="hidden" name="score3Q4" value="">
+      <input type="hidden" name="score4Q1" value="">
+      <input type="hidden" name="score4Q4" value="">
+      <input type="hidden" name="score5Q1" value="">
+      <input type="hidden" name="score5Q4" value="">
+
       <input type="hidden" name='今後目標5_1Q' value="">
       <input type="hidden" name='今後目標5_4Q' value="">
       <input type="hidden" name='今後課題5_1Q' value="">
@@ -1135,7 +1354,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("下書き", $column, $dis);
+     btn_submit("下書き", "draft", $column, $dis);
       ?>
     </td>
     <td>
@@ -1145,7 +1364,7 @@ $GLOBALS['sta_rbas'] = strval($GLOBALS['sta_rbas']);
       } else {
         $dis = "disabled";
       }
-      btn_submit("提出", $column, $dis);
+      btn_submit("提出", "submit", $column, $dis);
       ?>
     </td>
 

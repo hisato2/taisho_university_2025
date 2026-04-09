@@ -328,7 +328,7 @@ echo $mr[$sta_rintern];
 
       </tr>
       <tr>
-        <td class="text-center align-middle"><span class="fw600">精神実習Ⅰ（単独）/インターンシップⅡ</span><br>（3年次）</td>
+        <td class="text-center align-middle"><span class="fw600">精神実習Ⅰ/インターンシップⅡ</span></td>
         <td class="text-center text-Danger align-middle">
           <?php
         $dis = "disabled";
@@ -343,7 +343,7 @@ echo $mr[$sta_rmental1];
         <td class="text-center">
           <form action='sheet_ref_intern.php' method='post'>
             <input type='hidden' name='ID' value="<?PHP echo $value['id']; ?>">
-            <input type='hidden' name='SHEET_TITLE' value="精神実習Ⅰ（単独）/インターンシップⅡ">
+            <input type='hidden' name='SHEET_TITLE' value="精神実習Ⅰ/インターンシップⅡ">
 
             <input type='hidden' name='student_number' value="<?PHP echo $value['student_number']; ?>">
             <input type='hidden' name='name' value="<?PHP echo $value['name']; ?>">
@@ -352,10 +352,12 @@ echo $mr[$sta_rmental1];
         </td>
 
       </tr>
+
+
       <tr>
 
 
-        <td class="text-center align-middle"><span class="fw600">アドバンス・クラス/精神実習Ⅱ（単独）</span><br>（4年次）</td>
+        <td class="text-center align-middle"><span class="fw600">精神実習Ⅱ</span></td>
 
         <td class="text-center text-Danger align-middle">
           <?php
@@ -370,7 +372,7 @@ echo $mr[$sta_radv];
 
         <td class="text-center">
           <form action='sheet_ref_intern.php' method='post'>
-            <input type='hidden' name='SHEET_TITLE' value="アドバンス・クラス/精神実習Ⅱ（単独）">
+            <input type='hidden' name='SHEET_TITLE' value="精神実習Ⅱ">
             <input type='hidden' name='ID' value="<?PHP echo $value['id']; ?>">
             <input type='hidden' name='student_number' value="<?PHP echo $value['student_number']; ?>">
             <input type='hidden' name='name' value="<?PHP echo $value['name']; ?>">
