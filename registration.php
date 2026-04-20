@@ -7,7 +7,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./disp_parts/msg.php');
 require_once('./common/function.php');
 
@@ -68,7 +68,7 @@ if (
 }
 
 
-      
+
       // 学生紹介書（更新）
 if (isset($_POST['action']) && $_POST['action'] === "student_intro_update") {
     tbl_student_introduction_UPDATE($_POST['STUDENT_NUMBER']);
@@ -129,7 +129,7 @@ elseif (
 
 
 
-  
+
 
 
 
@@ -139,9 +139,9 @@ elseif (
   if (($_POST['TABLE'] == "tbl_self_assessment") & ($_POST['METHOD'] == "COMMENT_UP")) {
       $student_number = $_POST['STUDENT_NUMBER'];
       $cheet_title = $_POST['SHEET_TITLE'] ;
-      $school_year = $_POST['SELECT_NEN'] ?? ""; 
-      
-    
+      $school_year = $_POST['SELECT_NEN'] ?? "";
+
+
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -160,7 +160,7 @@ elseif (
 if (($_POST['TABLE'] == "tbl_self_assessment") & ($_POST['METHOD'] == "UP_DATE")) {
     $student_number = $_POST['STUDENT_NUMBER'];
     $cheet_title = $_POST['SHEET_TITLE'] ;
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
+    $school_year = $_POST['SELECT_NEN'] ?? "";
 
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
@@ -177,8 +177,8 @@ if (($_POST['TABLE'] == "tbl_practice_plan") & ($_POST['METHOD'] == "COMMENT_UP"
     $student_number = $_POST['STUDENT_NUMBER'];
     $cheet_title = $_POST['SHEET_TITLE'] ;
 
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
-    
+    $school_year = $_POST['SELECT_NEN'] ?? "";
+
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -193,7 +193,7 @@ if (($_POST['TABLE'] == "tbl_practice_plan") & ($_POST['METHOD'] == "COMMENT_UP"
 if (($_POST['TABLE'] == "tbl_practice_plan") & ($_POST['METHOD'] == "UP_DATE")) {
     $student_number = $_POST['STUDENT_NUMBER'];
     $cheet_title = $_POST['SHEET_TITLE'] ;
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
+    $school_year = $_POST['SELECT_NEN'] ?? "";
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -265,11 +265,11 @@ if (
 ///////////////////////////////////////
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if(isset($_POST['TABLE']) && isset($_POST['METHOD'])) {
-    
+
     if (($_POST['TABLE'] == "tbl_reflection_base") &&
       ($_POST['METHOD'] == "UP_DATE")) {
         $student_number = $_POST['STUDENT_NUMBER'];
-        $school_year = $_POST['SELECT_NEN'] ?? ""; 
+        $school_year = $_POST['SELECT_NEN'] ?? "";
 
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ///////////////////////////////////////
 if (($_POST['TABLE'] == "tbl_reflection_base") && ($_POST['METHOD'] == "COMMENT_UP")) {
     $student_number = $_POST['STUDENT_NUMBER'];
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
+    $school_year = $_POST['SELECT_NEN'] ?? "";
 
 
 
@@ -304,7 +304,7 @@ if (($_POST['TABLE'] == "tbl_reflection_base") && ($_POST['METHOD'] == "COMMENT_
 ///////////////////////////////////////
 if (($_POST['TABLE'] == "tbl_goal_sheet_4q") & ($_POST['METHOD'] == "UP_DATE")) {
     $student_number = $_POST['STUDENT_NUMBER'];
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
+    $school_year = $_POST['SELECT_NEN'] ?? "";
 
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
@@ -318,7 +318,7 @@ if (($_POST['TABLE'] == "tbl_goal_sheet_4q") & ($_POST['METHOD'] == "UP_DATE")) 
 ///////////////////////////////////////
 if (($_POST['TABLE'] == "tbl_goal_sheet_4q") & ($_POST['METHOD'] == "COMMENT_UP")) {
     $student_number = $_POST['STUDENT_NUMBER'];
-    $school_year = $_POST['SELECT_NEN'] ?? ""; 
+    $school_year = $_POST['SELECT_NEN'] ?? "";
 
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
@@ -336,19 +336,19 @@ if (($_POST['TABLE'] == "tbl_goal_sheet_4q") & ($_POST['METHOD'] == "COMMENT_UP"
 if (($_POST['TABLE'] == "tbl_goal_sheet_1q") & ($_POST['METHOD'] == "UP_DATE")) {
 
   $student_number = $_POST['STUDENT_NUMBER'];
-  $school_year = $_POST['SELECT_NEN'] ?? ""; 
+  $school_year = $_POST['SELECT_NEN'] ?? "";
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
   tbl_goal_sheet_1q_update($student_number, $school_year);
 
 }
-                                                                     
+
 if (($_POST['TABLE'] == "tbl_goal_sheet_1q") & ($_POST['METHOD'] == "COMMENT_UP")) {
 
 
   $student_number = $_POST['STUDENT_NUMBER'];
-  $school_year = $_POST['SELECT_NEN'] ?? ""; 
+  $school_year = $_POST['SELECT_NEN'] ?? "";
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -370,7 +370,7 @@ if (($_POST['TABLE'] == "tbl_profile_detail") & ($_POST['METHOD'] == "UP_DATE"))
 
 
   $student_number = $_POST['STUDENT_NUMBER'];
-  $school_year = $_POST['SELECT_NEN'] ?? ""; 
+  $school_year = $_POST['SELECT_NEN'] ?? "";
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -384,9 +384,9 @@ if (($_POST['TABLE'] == "tbl_profile_detail") & ($_POST['METHOD'] == "UP_DATE"))
 ///////////////////////////////////////
 if (($_POST['TABLE'] == "tbl_profile_detail") & ($_POST['METHOD'] == "COMMENT_UP")) {
 
-  
+
   $student_number = $_POST['STUDENT_NUMBER'];
-  $school_year = $_POST['SELECT_NEN'] ?? ""; 
+  $school_year = $_POST['SELECT_NEN'] ?? "";
     if ($status !== null) {
          submission_status_put($_POST['column'], $status, $student_number, $school_year);
     }
@@ -401,14 +401,14 @@ if (($_POST['TABLE'] == "tbl_profile_detail") & ($_POST['METHOD'] == "COMMENT_UP
 // tbl_profile
 ///////////////////////////////////////
 
- 
+
 
 if (($_POST['TABLE'] == "tbl_profile") & ($_POST['METHOD'] == "UP_DATE")) {
 
 
   $student_number  =$_POST['STUDENT_NUMBER'];
   tbl_profile_UPDATE($student_number);
- 
+
 }
 
 

@@ -12,7 +12,7 @@ function h($s)
 }
 
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 $ACTION="indicate_sheet_equipment_outline_list.php";
 
@@ -256,7 +256,7 @@ tbl_institution_overview_READ($student_number, $学年, $実習種別);
           </td>
           <td>
                <p><?php echo date('Y年m月d日', strtotime($実習終了日));?> </p>
-          
+
           </td>
         </tr>
       </table>
@@ -268,7 +268,7 @@ tbl_institution_overview_READ($student_number, $学年, $実習種別);
 
   </tr>
 </table>
- 
+
 
 <table class="table tunagi table-bordered border-secondary">
 

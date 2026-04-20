@@ -12,7 +12,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 

@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="select_sheet.php";
@@ -320,7 +320,7 @@ form_submit("registration.php");
     <td><?php _inputv("psw_hope4", $psw_hope4, "textarea",  $dis4, "h80","255"); ?></td>
   </tr>
 
-  
+
 <input type='hidden' name='adv_hope1' value="">
 <input type='hidden' name='adv_hope2' value="">
 <input type='hidden' name='adv_hope3' value="">

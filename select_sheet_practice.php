@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -195,7 +195,7 @@ $dis = "";
 
 
       <?php $cnt = tbl_assignment_check($_SESSION['STUDENT_NUMBER'], "精神保健福祉援助実習Ⅰ"); ?>
-    
+
       <tr>
         <td class="text-center"><span class="fw600">精神保健福祉援助実習Ⅰ</span></td>
         <td class="text-center"><span class="fw600"><?php echo $法人名; ?></span></td>
@@ -297,7 +297,7 @@ $dis = "";
 
 
 
-      
+
     </table>
 
 

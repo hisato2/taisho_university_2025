@@ -12,7 +12,7 @@ function h($s)
 }
 
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 
@@ -394,7 +394,7 @@ dsip_midashi("実習施設・機関の概要");
   <tr>
     <td>
       <?php btn_submit2("実習施設・機関の概要登録", "update", ""); ?>
-      
+
     </td>
     <td>
       <?php btn_return("sheet_equipment_outline_list.php", "戻る"); ?>

@@ -10,12 +10,12 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION = "student_list.php";
 
-require('./disp_parts/headerNonlistS.php');
+require('./disp_parts/headerNonlist.php');
 ?>
 <style>
   input[type="radio"] {
@@ -172,8 +172,8 @@ try {
                 textarea_e1, textarea_e2, textarea_e3, textarea_e4,
                 textarea_f1, textarea_f2, textarea_f3, textarea_f4,
                 textarea_h1, textarea_h2, textarea_h3, textarea_h4
-       FROM tbl_goal_sheet_1q 
-       WHERE student_number = ? 
+       FROM tbl_goal_sheet_1q
+       WHERE student_number = ?
        AND school_year = ?
        ");
 
@@ -347,7 +347,7 @@ $ref_base_fields = [
   'score4Q1',
   'score4Q4',
   'score5Q1',
-  'score5Q4'    
+  'score5Q4'
 ];
 
 foreach ($ref_base_fields as $field) {
@@ -665,7 +665,7 @@ form_submit("registration.php");
 
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
 
-     
+
 <div>
   <?php foreach ($labels as $val => $text): ?>
     <?php if ($score2Q1 == $val): ?>
@@ -735,7 +735,7 @@ form_submit("registration.php");
 
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
 
-    
+
 <div>
   <?php foreach ($labels as $val => $text): ?>
     <?php if ($score2Q4 == $val): ?>
@@ -813,7 +813,7 @@ form_submit("registration.php");
 
     <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
 
-     
+
 <div>
   <?php foreach ($labels as $val => $text): ?>
     <?php if ($score3Q1 == $val): ?>
@@ -884,7 +884,7 @@ form_submit("registration.php");
 
     <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
 
-   
+
 <div>
   <?php foreach ($labels as $val => $text): ?>
     <?php if ($score3Q4 == $val): ?>

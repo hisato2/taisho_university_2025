@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="practice_info.php";
@@ -56,7 +56,7 @@ form_submit("registration.php");
                         $sel3 = "";
                         $sel4 = "";
                         $sel5 = "";
-                        
+
                         if ($実習種別1 == 'ソーシャルワーク実習Ⅰ') {
                             $sel1 = "selected";
                         } elseif ($実習種別1== 'ソーシャルワーク実習Ⅱ') {
@@ -96,7 +96,7 @@ form_submit("registration.php");
                         $sel3 = "";
                         $sel4 = "";
                         $sel5 = "";
-                        
+
                         if ($実習種別2 == 'ソーシャルワーク実習Ⅰ') {
                             $sel1 = "selected";
                         } elseif ($実習種別2 == 'ソーシャルワーク実習Ⅱ') {
@@ -148,7 +148,7 @@ form_submit("registration.php");
     <td><input name="設置又は開始の年月日" type="date" cmanCLDat="USE:ON,LANG:EN,FORM:3" value=<?php echo $設置又は開始の年月日;?>  style="width:150px"></td>
       <td class="text-left align-middle"><span class="fw600">実習施設提出年月日</span></td>
     <td><input name="実習施設提出年月日" type="date" cmanCLDat="USE:ON,LANG:EN,FORM:3" value=<?php echo $実習施設提出年月日;?>  style="width:150px"></td>
-  
+
   </tr>
 
 </table>
@@ -206,7 +206,7 @@ form_submit("registration.php");
 
   </tr>
 
-  
+
 </table>
 
 <table class="tunagi table table-bordered border-secondary">
@@ -280,7 +280,7 @@ form_submit("registration.php");
    </td>
       <td>
       <?php
-       
+
         IF ($_POST['法人ID']!="9999999999"){
 
 

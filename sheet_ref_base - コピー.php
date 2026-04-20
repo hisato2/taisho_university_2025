@@ -14,7 +14,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 form_submit("registration.php");
@@ -47,8 +47,8 @@ try {
                 textarea_e1, textarea_e2, textarea_e3, textarea_e4,
                 textarea_f1, textarea_f2, textarea_f3, textarea_f4,
                 textarea_h1, textarea_h2, textarea_h3, textarea_h4
-       FROM tbl_goal_sheet_1q 
-       WHERE student_number = ? 
+       FROM tbl_goal_sheet_1q
+       WHERE student_number = ?
        AND school_year = ?
        ");
   $stmt->execute([$student_number, $school_year]);

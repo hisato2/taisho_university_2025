@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 $ACTION = "student_list.php";
 
@@ -190,7 +190,7 @@ form_submit("registration.php");
     <td width="20%" class="text-center"><span class="fw600">4年次</span></td>
   </tr>
 
-  
+
 <input type='hidden' name='advanced_course1' value="">
 <input type='hidden' name='advanced_course2' value="">
 <input type='hidden' name='advanced_course3' value="">

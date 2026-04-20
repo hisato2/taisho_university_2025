@@ -9,7 +9,7 @@ function h($s){
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -170,7 +170,7 @@ for ($i = 0; $i < 70; $i++) {
 }
 
 // ★ここを変更（セミコロン削除してこれに置換）
-$sql .= " ON DUPLICATE KEY UPDATE 
+$sql .= " ON DUPLICATE KEY UPDATE
 name=VALUES(name),
 email=VALUES(email),
 password=VALUES(password),

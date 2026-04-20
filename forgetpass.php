@@ -7,7 +7,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 require('./disp_parts/header.php');
@@ -41,7 +41,7 @@ require('data_keep.php');
               </div>
 
                 <div style="height:400px;"></div>
-                
+
 
 
 <?PHP
@@ -52,6 +52,6 @@ require('data_keep.php');
 require('./disp_parts/footer.php');
 exit;
 ?>
-            
+
 
 
