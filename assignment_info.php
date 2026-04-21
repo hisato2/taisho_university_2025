@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -50,16 +50,16 @@ if (!isset($_POST['選択実習種別'])) {
     $_POST['選択実習種別']="ソーシャルワーク実習Ⅰ";
 } else {
     if ($_POST['選択実習種別']=="ソーシャルワーク実習Ⅰ"){
-    $SEl2_1= "selected";    
+    $SEl2_1= "selected";
     }
     if ($_POST['選択実習種別']=="ソーシャルワーク実習Ⅱ"){
-    $SEl2_2= "selected";    
+    $SEl2_2= "selected";
     }
     if ($_POST['選択実習種別']=="精神保健福祉援助実習Ⅰ"){
-    $SEl2_3= "selected";    
+    $SEl2_3= "selected";
     }
     if ($_POST['選択実習種別']=="精神保健福祉援助実習Ⅱ"){
-    $SEl2_4= "selected";    
+    $SEl2_4= "selected";
     }
 }
 
@@ -79,7 +79,7 @@ if (!isset($_POST['選択実習種別'])) {
           <option value="ソーシャルワーク実習Ⅱ" <?php echo $SEl2_2;?>>ソーシャルワーク実習Ⅱ</option>
           <option value="精神保健福祉援助実習Ⅰ" <?php echo $SEl2_3;?>>精神保健福祉援助実習Ⅰ</option>
           <option value="精神保健福祉援助実習Ⅱ" <?php echo $SEl2_4;?>>精神保健福祉援助実習Ⅱ</option>
-          
+
         </select>
       </h5>
     </td>
@@ -129,7 +129,7 @@ $cnt = 0;
       <td class="text-center align-middle"><span class="fw600">当該年度の受入人数</span></td>
       <td class="text-center align-middle"><span class="fw600">現在の配属数</span></td>
       <td width="80px" class="text-center align-middle"><span class="fw600">配属情報</span></td>
-      
+
     </tr>
 
 

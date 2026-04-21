@@ -12,7 +12,7 @@ function h($s)
 }
 
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -40,7 +40,7 @@ try {
   $dbh = new PDO(DSN, DB_USER, DB_PASS);
   // SQL作成
 
-  
+
   $sql = "select 事業年度,tbl_institution.法人ID,tbl_institution.法人名,tbl_institution.施設名,tbl_institution.実習種別1,tbl_institution.実習種別2,tbl_institution.管理者,tbl_institution.管理者役職名,tbl_institution.実習窓口担当者名 FROM tbl_assignment JOIN tbl_institution ON tbl_assignment.法人ID=tbl_institution.法人ID where ((学籍番号1='" . $student_number ."') OR (学籍番号2='" . $student_number ."') OR (学籍番号3='" . $student_number ."') OR (学籍番号4='" . $student_number ."') OR (学籍番号5='" . $student_number ."')) AND 事業年度='".$_SESSION['NENDO']."'";
 
 
@@ -60,7 +60,7 @@ try {
       <td class="text-center align-middle"><span class="fw600">実習種別1</span></td>
       <td class="text-center align-middle"><span class="fw600">実習種別2</span></td>
       <td class="text-center align-middle"><span class="fw600">管理者</span></td>
-      
+
       <td class="text-center align-middle"><span class="fw600">窓口担当者</span></td>
       <td class="text-center align-middle"><span class="fw600">詳細</span></td>
     </tr>

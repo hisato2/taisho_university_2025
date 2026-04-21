@@ -16,10 +16,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
-
-
-
+require_once('./files/config_db_taisho2025.php');
 
 
 
@@ -194,7 +191,7 @@ try {
   if ((isset($_SESSION['SQL_BACKUP'])) AND $_SESSION['SQL_BACKUP']<>""){
     $sql = $_SESSION['SQL_BACKUP'];
 
-    
+
   } else {
     $sql = "select * from tbl_profile" . $where;
   }
@@ -202,7 +199,7 @@ try {
 
   $cnt = 0;
 
- 
+
 
 
 
@@ -236,6 +233,26 @@ try {
     foreach ($res as $value) {
       $cnt = $cnt + 1;
       $no = $value['student_number'];
+
+      // ✅ Check if student has downloadable data
+      $stmt = $dbh->prepare("
+          SELECT COUNT(*)
+          FROM tbl_goal_sheet_1q
+          WHERE student_number = ?
+      ");
+      $stmt->execute([$no]);
+      $goal_count = $stmt->fetchColumn();
+
+      $stmt = $dbh->prepare("
+          SELECT COUNT(*)
+          FROM tbl_reflection_base
+          WHERE student_number = ?
+      ");
+      $stmt->execute([$no]);
+      $reflection_count = $stmt->fetchColumn();
+
+      // Final decision
+      $has_downloadable = ($goal_count > 0 || $reflection_count > 0);
 
       if (isset($value['profile_1']) and $value['profile_1'] < 5) {
         $sta_prof1 =  intval($value['profile_1']);
@@ -648,6 +665,21 @@ try {
           echo "<a href='student_sorting.php?select=outline&no=" . $no . "'>実習配属先</a><br>";
           echo "<a href='student_sorting.php?select=intern&no=" . $no . "'>実習生紹介書</a>";
           ?>
+
+          <br><br>
+
+          <!-- NEW BUTTON -->
+          <?php if ($has_downloadable): ?>
+            <form method="POST" action="download_student_zip.php" style="margin-top:5px;">
+              <input type="hidden" name="student_number" value="<?= $no ?>">
+              <button type="submit" class="btn btn-success btn-sm">
+                CSV一括DL
+              </button>
+            </form>
+          <?php else: ?>
+            <span style="color: gray; font-size: 12px;">データなし</span>
+          <?php endif; ?>
+
         </td>
 
 
@@ -683,7 +715,7 @@ try {
       </td>
 
       <td>
-        <br><br> 
+        <br><br>
       <form method="post">
         <button type='submit'  class='btn btn-secondary w-200px' name="download_csv">自己採点ダウンロード</button>
       </form>

@@ -333,7 +333,7 @@ if (
       $pdo = new PDO(DSN, DB_USER, DB_PASS);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = "UPDATE tbl_institution_overview SET 氏名=?,法人名=?,施設名=?,郵便番号=?,所在地=?,電話=?,FAX=?,URL=?,MAIL=?,施設長=?,指導者1=?,指導者2=?,指導者3=?,実習開始日=?,実習終了日=?,法人事業概要=?,施設事業概要=?,周辺地域=?,施設情報1=?,施設情報2=? 
+      $sql = "UPDATE tbl_institution_overview SET 氏名=?,法人名=?,施設名=?,郵便番号=?,所在地=?,電話=?,FAX=?,URL=?,MAIL=?,施設長=?,指導者1=?,指導者2=?,指導者3=?,実習開始日=?,実習終了日=?,法人事業概要=?,施設事業概要=?,周辺地域=?,施設情報1=?,施設情報2=?
  WHERE ((学籍番号=?) AND (学年=?) AND (実習種別=?))";
       $stmt = $pdo->prepare($sql);
 
@@ -425,7 +425,7 @@ function tbl_student_introduction_UPDATE($student_number)
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     try {
-      $sql = "insert tbl_student_introduction(`学籍番号`, `学年`, `氏名`, `かな`, `生年月日`, `資格課程`, `郵便現住所`, `現住所`, `電話`, `郵便帰省先`, `帰省先`, `帰省先電話`, `職歴`, `学内所属団体`, `学外所属団体`, `健康状態`, `考慮事項`, `資格特技`, `趣味`, `自己アピール`, `現場体験`, `準備状況`, `教員コメント`, `指導教員`, `事務担当`) 
+      $sql = "insert tbl_student_introduction(`学籍番号`, `学年`, `氏名`, `かな`, `生年月日`, `資格課程`, `郵便現住所`, `現住所`, `電話`, `郵便帰省先`, `帰省先`, `帰省先電話`, `職歴`, `学内所属団体`, `学外所属団体`, `健康状態`, `考慮事項`, `資格特技`, `趣味`, `自己アピール`, `現場体験`, `準備状況`, `教員コメント`, `指導教員`, `事務担当`)
               values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
       $stmt = $pdo->prepare($sql);
@@ -476,10 +476,10 @@ function tbl_student_introduction_UPDATE($student_number)
       $pdo = new PDO(DSN, DB_USER, DB_PASS);
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-      $sql = "UPDATE tbl_student_introduction SET 
-                学年=?, 氏名=?, かな=?, 生年月日=?, 資格課程=?, 郵便現住所=?, 現住所=?, 電話=?, 
-                郵便帰省先=?, 帰省先=?, 帰省先電話=?, 職歴=?, 学内所属団体=?, 学外所属団体=?, 
-                健康状態=?, 考慮事項=?, 資格特技=?, 趣味=?, 自己アピール=?, 現場体験=?, 準備状況=?, 
+      $sql = "UPDATE tbl_student_introduction SET
+                学年=?, 氏名=?, かな=?, 生年月日=?, 資格課程=?, 郵便現住所=?, 現住所=?, 電話=?,
+                郵便帰省先=?, 帰省先=?, 帰省先電話=?, 職歴=?, 学内所属団体=?, 学外所属団体=?,
+                健康状態=?, 考慮事項=?, 資格特技=?, 趣味=?, 自己アピール=?, 現場体験=?, 準備状況=?,
                 教員コメント=?, 指導教員=?, 事務担当=?
               WHERE (学籍番号=?)";
 
@@ -2564,8 +2564,8 @@ function tbl_assignment_read2($student_number, $syubetu)
 
     $dbh = new PDO(DSN, DB_USER, DB_PASS);
     // SQL作成
-    $sql = "select *  FROM `tbl_assignment` where (((実習種別1='" . $syubetu . "') AND (学籍番号1='" . $student_number . "')) OR 
-((実習種別2='" . $syubetu . "') AND (学籍番号2='" . $student_number . "')) OR ((実習種別3='" . $syubetu . "') AND (学籍番号3='" . $student_number . "')) OR 
+    $sql = "select *  FROM `tbl_assignment` where (((実習種別1='" . $syubetu . "') AND (学籍番号1='" . $student_number . "')) OR
+((実習種別2='" . $syubetu . "') AND (学籍番号2='" . $student_number . "')) OR ((実習種別3='" . $syubetu . "') AND (学籍番号3='" . $student_number . "')) OR
 ((実習種別4='" . $syubetu . "') AND (学籍番号4='" . $student_number . "')) OR ((実習種別5='" . $syubetu . "') AND (学籍番号5='" . $student_number . "')))";
 
 
@@ -2659,8 +2659,8 @@ function tbl_assignment_check($student_number, $syubetu)
 
     $dbh = new PDO(DSN, DB_USER, DB_PASS);
     // SQL作成
-    $sql = "select `法人名`, `施設名`  FROM `tbl_assignment` where (((実習種別1='" . $syubetu . "') AND (学籍番号1='" . $student_number . "')) OR 
-((実習種別2='" . $syubetu . "') AND (学籍番号2='" . $student_number . "')) OR ((実習種別3='" . $syubetu . "') AND (学籍番号3='" . $student_number . "')) OR 
+    $sql = "select `法人名`, `施設名`  FROM `tbl_assignment` where (((実習種別1='" . $syubetu . "') AND (学籍番号1='" . $student_number . "')) OR
+((実習種別2='" . $syubetu . "') AND (学籍番号2='" . $student_number . "')) OR ((実習種別3='" . $syubetu . "') AND (学籍番号3='" . $student_number . "')) OR
 ((実習種別4='" . $syubetu . "') AND (学籍番号4='" . $student_number . "')) OR ((実習種別5='" . $syubetu . "') AND (学籍番号5='" . $student_number . "')))";
 
 
@@ -3504,7 +3504,7 @@ function tbl_reflection_base_READ($student_number, $school_year)
     'score4Q1',
     'score4Q4',
     'score5Q1',
-    'score5Q4',    
+    'score5Q4',
     'comments_of_teacher'
   ];
 
@@ -3516,7 +3516,7 @@ function tbl_reflection_base_READ($student_number, $school_year)
 
 
 
-  
+
 
 
 
@@ -3875,17 +3875,17 @@ function tbl_goal_sheet_4q_UPDATE($student_number, $school_year)
   if ($cnt == 0) {   /* 新規書込み (INSERT) */
     try {
       $sql = "INSERT INTO tbl_goal_sheet_4q (
-            `student_number`, `school_year`, 
+            `student_number`, `school_year`,
             `target_person`, `practical_field`, `professional_position`, `activity_issues`,
-            `activity_method`, `aimed_results`, `your_goal`, `need_your_goal`, 
+            `activity_method`, `aimed_results`, `your_goal`, `need_your_goal`,
             `study_target01`, `study_target02`, `study_target03`, `study_target04`,
             `study_target05`, `study_target06`, `study_conversion01`, `study_conversion02`,
             `study_conversion03`, `study_conversion04`, `study_conversion05`, `study_conversion06`,
-            `qualification`, `qualification_other`, `education1`, `education2`, `education3`, 
+            `qualification`, `qualification_other`, `education1`, `education2`, `education3`,
             `education4`, `experience`, `reason`,
-            `goal4q_opt_a1`, `goal4q_opt_a2`, `goal4q_opt_a3`, `goal4q_opt_a4`, 
+            `goal4q_opt_a1`, `goal4q_opt_a2`, `goal4q_opt_a3`, `goal4q_opt_a4`,
             `goal4q_opt_b1`, `goal4q_opt_b2`, `goal4q_opt_b3`, `goal4q_opt_b4`,
-            `goal4q_opt_c1`, `goal4q_opt_c2`, `goal4q_opt_c3`, `goal4q_opt_c4`, 
+            `goal4q_opt_c1`, `goal4q_opt_c2`, `goal4q_opt_c3`, `goal4q_opt_c4`,
             `goal4q_opt_d1`, `goal4q_opt_d2`, `goal4q_opt_d3`, `goal4q_opt_d4`,
             `goal4q_opt_e1`, `goal4q_opt_e2`, `goal4q_opt_e3`, `goal4q_opt_e4`,
             `goal4q_opt_g1`, `goal4q_opt_g2`, `goal4q_opt_g3`, `goal4q_opt_g4`,
@@ -3896,13 +3896,13 @@ function tbl_goal_sheet_4q_UPDATE($student_number, $school_year)
             `goal4q_txt_f1`, `goal4q_txt_f2`, `goal4q_txt_f3`, `goal4q_txt_f4`,
             `goal4q_txt_h1`, `goal4q_txt_h2`, `goal4q_txt_h3`, `goal4q_txt_h4`
         ) VALUES (
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
-            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
+            ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
             ?, ?, ?, ?, ?, ?, ?, ?
         )";
 
@@ -4029,14 +4029,14 @@ function tbl_goal_sheet_4q_UPDATE($student_number, $school_year)
     exit;
   } else {  /* 更新書込み (UPDATE) */
     try {
-      $sql = "UPDATE tbl_goal_sheet_4q SET 
+      $sql = "UPDATE tbl_goal_sheet_4q SET
                 target_person=?, practical_field=?, professional_position=?, activity_issues=?,
                 activity_method=?, aimed_results=?, your_goal=?, need_your_goal=?,
                 study_target01=?, study_target02=?, study_target03=?, study_target04=?,
                 study_target05=?, study_target06=?, study_conversion01=?,
                 study_conversion02=?, study_conversion03=?, study_conversion04=?,
-                study_conversion05=?, study_conversion06=?, qualification=?, 
-                qualification_other=?, education1=?, education2=?, education3=?, 
+                study_conversion05=?, study_conversion06=?, qualification=?,
+                qualification_other=?, education1=?, education2=?, education3=?,
                 education4=?, experience=?, reason=?,
 
                 goal4q_opt_a1=?, goal4q_opt_a2=?, goal4q_opt_a3=?, goal4q_opt_a4=?,
@@ -4052,7 +4052,7 @@ function tbl_goal_sheet_4q_UPDATE($student_number, $school_year)
                 goal4q_txt_e1=?, goal4q_txt_e2=?, goal4q_txt_e3=?, goal4q_txt_e4=?,
                 goal4q_txt_f1=?, goal4q_txt_f2=?, goal4q_txt_f3=?, goal4q_txt_f4=?,
                 goal4q_txt_h1=?, goal4q_txt_h2=?, goal4q_txt_h3=?, goal4q_txt_h4=?
-                
+
                 WHERE (student_number=?) AND (school_year=?)";
 
       $stmt = $pdo->prepare($sql);
@@ -4205,15 +4205,15 @@ function tbl_goal_sheet_4q_READ($student_number, $school_year)
 {
 
 
-  
-  
+
+
 
   $GLOBALS['今後目標1_1Q'] = "";
   $GLOBALS['今後目標2_1Q'] = "";
   $GLOBALS['今後目標3_1Q'] = "";
   $GLOBALS['今後目標4_1Q'] = "";
   $GLOBALS['今後目標5_1Q'] = "";
-  
+
   try {
     // DBへ接続
     $dbh = new PDO(DSN, DB_USER, DB_PASS);
@@ -4221,8 +4221,8 @@ function tbl_goal_sheet_4q_READ($student_number, $school_year)
     // SQL作成
 
 
-    $sql_reflection = "SELECT 今後目標1_1Q,今後目標2_1Q,今後目標3_1Q,今後目標4_1Q,今後目標5_1Q 
-        FROM tbl_reflection_base 
+    $sql_reflection = "SELECT 今後目標1_1Q,今後目標2_1Q,今後目標3_1Q,今後目標4_1Q,今後目標5_1Q
+        FROM tbl_reflection_base
         WHERE student_number = :student_number AND school_year = :school_year";
     $stmt_reflection = $dbh->prepare($sql_reflection);
     $stmt_reflection->execute([
@@ -4233,13 +4233,13 @@ function tbl_goal_sheet_4q_READ($student_number, $school_year)
 
     if ($value = $stmt_reflection->fetch(PDO::FETCH_ASSOC)) {
 
-      
+
       $GLOBALS['今後目標1_1Q'] =  $value['今後目標1_1Q'];
       $GLOBALS['今後目標2_1Q'] =  $value['今後目標2_1Q'];
       $GLOBALS['今後目標3_1Q'] =  $value['今後目標3_1Q'];
       $GLOBALS['今後目標4_1Q'] =  $value['今後目標4_1Q'];
       $GLOBALS['今後目標5_1Q'] =  $value['今後目標5_1Q'];
-      
+
     }
   } catch (PDOException $e) {
     error_log("tbl_goal_sheet_4q_READ (tbl_reflection_base) Error: " . $e->getMessage());
@@ -4294,60 +4294,60 @@ function tbl_goal_sheet_4q_READ($student_number, $school_year)
     'goal4q_opt_a2',
     'goal4q_opt_a3',
     'goal4q_opt_a4',
-    
-    
+
+
     'goal4q_opt_b1',
     'goal4q_opt_b2',
     'goal4q_opt_b3',
     'goal4q_opt_b4',
-    
+
     'goal4q_opt_c1',
     'goal4q_opt_c2',
     'goal4q_opt_c3',
     'goal4q_opt_c4',
-    
+
     'goal4q_opt_d1',
     'goal4q_opt_d2',
     'goal4q_opt_d3',
     'goal4q_opt_d4',
-    
+
     'goal4q_opt_e1',
     'goal4q_opt_e2',
     'goal4q_opt_e3',
     'goal4q_opt_e4',
-    
+
     'goal4q_opt_g1',
     'goal4q_opt_g2',
     'goal4q_opt_g3',
     'goal4q_opt_g4',
-    
+
     'goal4q_txt_b1',
     'goal4q_txt_b2',
     'goal4q_txt_b3',
     'goal4q_txt_b4',
-    
+
     'goal4q_txt_c1',
     'goal4q_txt_c2',
     'goal4q_txt_c3',
     'goal4q_txt_c4',
-    
+
     'goal4q_txt_d1',
     'goal4q_txt_d2',
     'goal4q_txt_d3',
     'goal4q_txt_d4',
-    
+
     'goal4q_txt_e1',
     'goal4q_txt_e2',
     'goal4q_txt_e3',
     'goal4q_txt_e4',
-    
-    
+
+
     'goal4q_txt_f1',
     'goal4q_txt_f2',
     'goal4q_txt_f3',
     'goal4q_txt_f4',
-    
-    
+
+
     'goal4q_txt_h1',
     'goal4q_txt_h2',
     'goal4q_txt_h3',
@@ -4359,7 +4359,7 @@ function tbl_goal_sheet_4q_READ($student_number, $school_year)
   }
 
   try {
-    $sql_goal = "SELECT * FROM tbl_goal_sheet_4q 
+    $sql_goal = "SELECT * FROM tbl_goal_sheet_4q
                WHERE student_number = :student_number AND school_year = :school_year";
     $stmt_goal = $dbh->prepare($sql_goal);
     $stmt_goal->execute([
@@ -4700,7 +4700,7 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
        aimed_results=?,
        your_goal=?,
        need_your_goal=?,
-       
+
        study_target01=?,
        study_target02=?,
        study_target03=?,
@@ -4714,7 +4714,7 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
        study_conversion04=?,
        study_conversion05=?,
        study_conversion06=?,
-       
+
        sw_conversion01=?,
        sw_conversion02=?,
        sw_conversion03=?,
@@ -4727,7 +4727,7 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
        sw_conversion10=?,
        sw_conversion11=?,
        sw_conversion12=?,
-       
+
        intern_target01=?,
        intern_target02=?,
        intern_target03=?,
@@ -4740,7 +4740,7 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
        intern_target10=?,
        intern_target11=?,
        intern_target12=?,
-       
+
        intern_conversion01=?,
        intern_conversion02=?,
        intern_conversion03=?,
@@ -4752,13 +4752,13 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
        intern_conversion09=?,
        intern_conversion10=?,
        intern_conversion11=?,
-       intern_conversion12=?, 
-       
-       option_a1 = ?, 
-       option_a2 = ?, 
-       option_a3 = ?, 
-       option_a4 = ?, 
-             
+       intern_conversion12=?,
+
+       option_a1 = ?,
+       option_a2 = ?,
+       option_a3 = ?,
+       option_a4 = ?,
+
       option_b1=?,
       option_b2=?,
       option_b3=?,
@@ -4782,7 +4782,7 @@ function tbl_goal_sheet_1q_update($student_number, $school_year)
       option_g1=?,
       option_g2=?,
       option_g3=?,
-      option_g4=?, 
+      option_g4=?,
       textarea_b1=?,
       textarea_b2=?,
       textarea_b3=?,
@@ -5854,7 +5854,7 @@ function btn_submit($title, $action, $column, $mode)
   if ($title == "登録") $btntype = "btn-success";
   if ($title == "変更/削除実行") $btntype = "btn-danger";
   if ($title == "法人削除") $btntype = "btn-danger";
-  
+
   if ($title == "実習生紹介書登録") $btntype = "btn-success";
   if ($title == "実習施設・機関の概要登録") $btntype = "btn-success";
   if ($title == "年度更新") $btntype = "btn-warning";
@@ -6261,7 +6261,7 @@ function _inputv($name, $dat_value, $type, $mode, $hight1, $length)
     $w = "250px";
     if ($type == "text") {
     ?>
-      <div class="input-group mb-0" style='background-color:#ffffff'>
+    <div class="input-group mb-0" style='background-color:#ffffff'>
         <div class="input-group mb-0">
           <?php
 
@@ -6296,7 +6296,7 @@ function _inputv($name, $dat_value, $type, $mode, $hight1, $length)
     if ($type == "text") {
       ?>
         <div class="input-group mb-0">
-          <input type="text" <?php echo $length; ?> name="<?php echo $name; ?>" value="<?php echo $dat_value; ?>" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" <?php echo $required; ?>>
+          <input type="text" <?php echo $length; ?> name="<?php echo $name; ?>" value="<?php echo $dat_value; ?>" class="form-control input-highlight" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" <?php echo $required; ?>>
         </div>
       <?php
 
@@ -6305,8 +6305,13 @@ function _inputv($name, $dat_value, $type, $mode, $hight1, $length)
       //テキストエリアの場合
       ?>
 
-        <textarea class="form-control <?php echo $hight1; ?>"  aria-label="With textarea" name="<?php echo $name; ?><?php echo $required; ?>"><?php echo $dat_value; ?></textarea>
-      </div>
+        <div class="input-container">
+          <textarea class="form-control input-white <?php echo $hight1; ?>"
+              name="<?php echo $name; ?>" <?php echo $required; ?>>
+              <?php echo $dat_value; ?>
+          </textarea>
+        </div>
+    </div>
     <?php
     } elseif ($type == "password") {
 
@@ -6527,14 +6532,14 @@ function mein_menu()
     <td></td>
     <td></td>
     </tr>
-    
-    
+
+
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
     <!--ここはデバックです。
-    
+
     <tr>
 
       <td class="text-center"> <a type="button" class="btn btn-secondary w-200px" href="common/status_clear.php?mode=0">未作成にする</a></td>
@@ -6549,13 +6554,13 @@ function mein_menu()
       <td class="text-center"></td>
     </tr>
     -->
-    
+
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
     <!--ここはデバックです。-->
-    
-    
+
+
     <!-- Comment out after the implemntation -->
 
   </table>

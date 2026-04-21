@@ -21,15 +21,23 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 form_submit("registration.php");
 
 $ACTION = "select_sheet.php";
 
-require('./disp_parts/headerNonlistS.php');
+require('./disp_parts/headerNonlist.php');
+?>
 
+<style>
+  input[type="radio"] {
+    pointer-events: none;
+  }
+</style>
+
+<?php
 
 require('data_keep.php');
 
@@ -134,8 +142,8 @@ try {
                 textarea_e1, textarea_e2, textarea_e3, textarea_e4,
                 textarea_f1, textarea_f2, textarea_f3, textarea_f4,
                 textarea_h1, textarea_h2, textarea_h3, textarea_h4
-       FROM tbl_goal_sheet_1q 
-       WHERE student_number = ? 
+       FROM tbl_goal_sheet_1q
+       WHERE student_number = ?
        AND school_year = ?
        ");
   $stmt->execute([$student_number, $school_year]);
@@ -378,7 +386,7 @@ tbl_reflection_base_READ($student_number, $_SESSION['SELECT_NEN']);
 
 if (($GLOBALS['sta_rbas'] == 4) or ($GLOBALS['sta_rbas'] == 2)) {
   $edits = "";
-  
+
   $disabled= "disabled";
 } else {
   $edits = "edit";
@@ -443,9 +451,9 @@ $自己目標5 = $study_target05;
 
 
 
-<table class="table changing-line">
+<table class="table changing-line" style="border: 1px solid black;">
 
-  <table style="border: 1px solid black;">
+  <!-- <table style="border: 1px solid black;"> -->
 
     <tr style="border: 1px solid #fff">
       <td width="5%" rowspan="2" class="changing-line text-center text-middle color_td1">
@@ -484,7 +492,7 @@ $自己目標5 = $study_target05;
         <br><span class="fs80"></span>
       </td>
 
-    
+
 
      <td class='changing-line text-middle color_td1'>
         <span class="fw600">①の自己評価点</span>
@@ -516,16 +524,16 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("共通目標1", $study_target01, "textarea", "", "h200", "255"); ?>
       </td>
-      <td rowspan="4" class='changing-line color_td1 wbr ' style="vertical-align: top;">
+      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("自己目標1", $自己目標1, "textarea", "", "h200", "255"); ?>
       </td>
-      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td rowspan="4" class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("出来た1", $出来た1, "textarea", $edits, "h200", "255"); ?>
       </td>
 
-      <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
-       
-       
+      <td rowspan="4" class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
+
+
 <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score1Q1" value="<?= $val ?>" <?= ($score1Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -541,10 +549,10 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず1", $出来ず1, "textarea", $edits, "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標1_1Q1", $力獲得目標1_1Q1, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref1_1Q1", $ref1_1Q1, "textarea", $edits, "h200", "255"); ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
@@ -555,26 +563,26 @@ $自己目標5 = $study_target05;
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標1_1Q2", $力獲得目標1_1Q2, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref1_1Q2", $ref1_1Q2, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標1_1Q3", $力獲得目標1_1Q3, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref1_1Q3", $ref1_1Q4, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標1_1Q4", $力獲得目標1_1Q4, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref1_1Q4", $ref1_1Q4, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
@@ -596,8 +604,8 @@ $自己目標5 = $study_target05;
       </td>
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-       
-       
+
+
 <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score1Q4" value="<?= $val ?>" <?= ($score1Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -687,7 +695,7 @@ $自己目標5 = $study_target05;
       </td>
 
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
-      
+
           <?php foreach ($labels as $val => $text): ?>
           <label>
             <input type="radio" name="score2Q1" value="<?= $val ?>" <?= ($score2Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -703,10 +711,10 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず2", $出来ず2, "textarea", $edits, "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標2_1Q1", $力獲得目標2_1Q1, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref2_1Q1", $ref2_1Q1, "textarea", $edits, "h200", "255"); ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
@@ -717,26 +725,26 @@ $自己目標5 = $study_target05;
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標2_1Q2", $力獲得目標2_1Q2, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref2_1Q2", $ref2_1Q2, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標2_1Q3", $力獲得目標2_1Q3, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref2_1Q3", $ref2_1Q3, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標2_1Q4", $力獲得目標2_1Q4, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref2_1Q4", $ref2_1Q4, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
@@ -756,9 +764,9 @@ $自己目標5 = $study_target05;
       </td>
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-      
-      
- 
+
+
+
 <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score2Q4" value="<?= $val ?>" <?= ($score2Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -846,10 +854,10 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず3", $出来ず3, "textarea", $edits, "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標3_1Q1", $力獲得目標3_1Q1, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref3_1Q1", $ref3_1Q1, "textarea", $edits, "h200", "255"); ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
@@ -860,26 +868,26 @@ $自己目標5 = $study_target05;
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標3_1Q2", $力獲得目標3_1Q2, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref3_1Q2", $ref3_1Q2, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標3_1Q3", $力獲得目標3_1Q3, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref3_1Q3", $ref3_1Q3, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標3_1Q4", $力獲得目標3_1Q4, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref3_1Q4", $ref3_1Q4, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
@@ -901,9 +909,9 @@ $自己目標5 = $study_target05;
 
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-        
-      
-      
+
+
+
 
  <?php foreach ($labels as $val => $text): ?>
   <label>
@@ -981,9 +989,9 @@ $自己目標5 = $study_target05;
       </td>
 
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
-          
 
- 
+
+
 <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score4Q1" value="<?= $val ?>" <?= ($score4Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -998,10 +1006,10 @@ $自己目標5 = $study_target05;
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
         <?php _inputv("出来ず4", $出来ず4, "textarea", $edits, "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標4_1Q1", $力獲得目標4_1Q1, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref4_1Q1", $ref4_1Q1, "textarea", $edits, "h200", "255"); ?>
       </td>
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
@@ -1012,26 +1020,26 @@ $自己目標5 = $study_target05;
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標4_1Q2", $力獲得目標4_1Q2, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref4_1Q2", $ref4_1Q2, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標4_1Q3", $力獲得目標4_1Q3, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref4_1Q3", $ref4_1Q3, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
     <tr style="border: 1px solid #fff">
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("力獲得目標4_1Q4", $力獲得目標4_1Q4, "textarea", "", "h200", "255"); ?>
       </td>
-      <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+      <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
         <?php _inputv("ref4_1Q4", $ref4_1Q4, "textarea", $edits, "h200", "255"); ?>
       </td>
     </tr>
@@ -1053,8 +1061,8 @@ $自己目標5 = $study_target05;
 
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
-       
-      
+
+
 
 
       <?php foreach ($labels as $val => $text): ?>
@@ -1141,10 +1149,10 @@ $自己目標5 = $study_target05;
 
 
       <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
-        
-      
 
-      
+
+
+
  <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score5Q1" value="<?= $val ?>" <?= ($score5Q1 == $val) ? 'checked' : '' ?> <?= $disabled ?>>
@@ -1158,10 +1166,10 @@ $自己目標5 = $study_target05;
         <td rowspan="4" class='changing-line color_td1 wbr' style="vertical-align: top;">
           <?php _inputv("出来ず5", $出来ず5, "textarea", $edits, "h200", "255"); ?>
         </td>
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("力獲得目標5_1Q1", $力獲得目標5_1Q1, "textarea", "", "h200", "255"); ?>
         </td>
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("ref5_1Q1", $ref5_1Q1, "textarea", $edits, "h200", "255"); ?>
         </td>
         <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
@@ -1172,26 +1180,26 @@ $自己目標5 = $study_target05;
         </td>
       </tr>
       <tr style="border: 1px solid #fff">
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("力獲得目標5_1Q2", $力獲得目標5_1Q2, "textarea", "", "h200", "255"); ?>
         </td>
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("ref5_1Q2", $ref5_1Q2, "textarea", $edits, "h200", "255"); ?>
         </td>
       </tr>
       <tr style="border: 1px solid #fff">
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("力獲得目標5_1Q3", $力獲得目標5_1Q3, "textarea", "", "h200", "255"); ?>
         </td>
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("ref5_1Q3", $ref5_1Q3, "textarea", $edits, "h200", "255"); ?>
         </td>
       </tr>
       <tr style="border: 1px solid #fff">
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("力獲得目標5_1Q4", $力獲得目標5_1Q4, "textarea", "", "h200", "255"); ?>
         </td>
-        <td class='changing-line color_td1 wbr' style="vertical-align: top;">
+        <td class='changing-line color_td1 wbr <?php echo ($edits ? "editable-td" : ""); ?>' style="vertical-align: top;">
           <?php _inputv("ref5_1Q4", $ref5_1Q4, "textarea", $edits, "h200", "255"); ?>
         </td>
       </tr>
@@ -1200,7 +1208,7 @@ $自己目標5 = $study_target05;
         <td rowspan='4' class='changing-line text-middle color_td4'>
           <span class='fw600 text-center'><?php echo h($_SESSION['SELECT_NEN']); ?>年次<br>(3Q/4Q)</span>
         </td>
-                
+
         <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
           <?php echo  $study_target05; ?>
         </td>
@@ -1214,8 +1222,8 @@ $自己目標5 = $study_target05;
 
       <td rowspan="4" class='changing-line color_td4 wbr' style="vertical-align: top;">
 
-      
-      
+
+
 <?php foreach ($labels as $val => $text): ?>
   <label>
     <input type="radio" name="score5Q4" value="<?= $val ?>" <?= ($score5Q4 == $val) ? 'checked' : '' ?> <?= $disabled ?>>

@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 /*
@@ -142,7 +142,7 @@ switch ($_GET['select']) {
     $_SESSION['SEL_SHEET_TITLE'] = "精神実習Ⅰ/インターンシップⅡ";
     header("Location:indicate_sheet_ref_intern.php");
     break;
-  
+
     case 'ref_advance':
     $_SESSION['SEL_COLUMN'] = "ref_advance";
     $_SESSION['SEL_SHEET_TITLE'] = "精神実習Ⅱ";
@@ -174,8 +174,8 @@ switch ($_GET['select']) {
 
     header("Location:indicate_sheet_practice_plan.php");
     break;
-  
-  
+
+
   case 'self_sw1':
 
     $_SESSION['SEL_COLUMN'] = "self_sw1";
@@ -201,7 +201,7 @@ switch ($_GET['select']) {
 
     header("Location:indicate_sheet_self_assessment.php");
     break;
-  
+
 }
 
 

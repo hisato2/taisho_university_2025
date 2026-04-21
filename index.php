@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 
 
 require_once('./common/function.php');
@@ -28,7 +28,7 @@ if (!isset($_SESSION['EMAIL'])) {
     if ($_SESSION['KUBUN'] == "教員") {
         kanri_menu();
     } else {
-        mein_menu();   
+        mein_menu();
     }
 }
 ?>

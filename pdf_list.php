@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -157,7 +157,7 @@ $sql = $sql."tbl_assignment.総実習時間5 AS iii_c_BR";
 
     <?php
 
- 
+
 
     $res = $dbh->query($sql);
 
@@ -179,7 +179,7 @@ $sql = $sql."tbl_assignment.総実習時間5 AS iii_c_BR";
 
     if ($value['iii_c_AO']<>"") {
       $配属人数=3;
-    
+
 
     }
 
@@ -189,12 +189,12 @@ $sql = $sql."tbl_assignment.総実習時間5 AS iii_c_BR";
     if ($value['iii_c_BM']<>"") {
       $配属人数=5;
     }
-      
+
 
 
     ?>
       <tr>
-       
+
         <td class="text-center align-middle"><?php echo $cnt; ?></td>
         <td class="text-center align-middle"><?php echo $value['iii_a_F']; ?></td>
         <td class="text-center align-middle"><?php echo $value['iii_a_G']; ?></td>

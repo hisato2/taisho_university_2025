@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION="index.php";
@@ -37,32 +37,32 @@ if (!isset($_GET['gNEN'])) {
   $_GET['gNEN'] = $_SESSION['SELECT_NEN'];
 }
 
- 
+
 
 
 if ($_GET['gNEN'] == "1") {
   $sel_nen = "1";
-  $_SESSION['SELECT_NEN']=1;  
+  $_SESSION['SELECT_NEN']=1;
   $btn_type1 = "btn-primary";
   //$dis = "disabled";
   $dis = "";
-  
-  
+
+
 } elseif ($_GET['gNEN'] == "2") {
   $sel_nen = "2";
-  $_SESSION['SELECT_NEN']=2;  
+  $_SESSION['SELECT_NEN']=2;
   $btn_type2 = "btn-primary";
   $dis = "";
-  
+
 
 } elseif ($_GET['gNEN'] == "3") {
   $sel_nen = "3";
-  $_SESSION['SELECT_NEN']=3;  
+  $_SESSION['SELECT_NEN']=3;
   $btn_type3 = "btn-primary";
   $dis = "";
 } elseif ($_GET['gNEN'] == "4") {
   $sel_nen = "4";
-  $_SESSION['SELECT_NEN']=4;  
+  $_SESSION['SELECT_NEN']=4;
   $btn_type4 = "btn-primary";
   $dis = "";
 }
@@ -104,7 +104,7 @@ dsip_midashi("学修計画・リフレクション・シート　シート選択
 
   <div class="row">
     <div class="col-5">
-     
+
     <table class="table table-bordered border-secondary">
         <tr>
           <td class="text-center align-middle"><span class="fw600">通年</span></td>
@@ -199,7 +199,7 @@ dsip_midashi("学修計画・リフレクション・シート　シート選択
           <td width="20%" class="text-center align-middle"><span class="fw600"><?php echo $_GET['gNEN']; ?></span></td>
           <td width="40%" class="text-center text-Success align-middle">
             <?php
-            
+
             echo $mr[$sta_rbas];
 
             ?>
@@ -265,7 +265,7 @@ $sta = $GLOBALS['sta_jadv'];
             <input type='hidden' name='student_number' value="<?PHP echo $value['student_number']; ?>">
             <input type='hidden' name='name' value="<?PHP echo $value['name']; ?>">
 
-                
+
                 <button type='submit' class='btn btn-success' <?PHP echo $dis; ?>>詳細</button>
 
           </form>
@@ -278,7 +278,7 @@ $sta = $GLOBALS['sta_jadv'];
 
         <td class="text-center text-Danger align-middle">
           <?php
-          
+
 echo $mr[$sta_rsw2];
 
 
@@ -306,7 +306,7 @@ echo $mr[$sta_rsw2];
         <td class="text-center align-middle"><span class="fw600">インターンシップⅠ</span><br>（2年次）</td>
         <td class="text-center text-Danger align-middle">
           <?php
-          
+
         $dis = "disabled";
         if ($_SESSION['SELECT_NEN']==2) {
           $dis ="";
@@ -335,7 +335,7 @@ echo $mr[$sta_rintern];
         if ($_SESSION['SELECT_NEN']==3) {
           $dis ="";
         }
-  
+
 echo $mr[$sta_rmental1];
           ?>
         </td>

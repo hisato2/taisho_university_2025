@@ -2,7 +2,7 @@
 session_start();
 $_SESSION = array();
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 
 
 

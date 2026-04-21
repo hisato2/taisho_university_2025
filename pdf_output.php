@@ -1,8 +1,8 @@
 <?php
 // *********************************************************************
-// 
+//
 // 初期設定
-// 
+//
 // *********************************************************************
 session_start();
 if (!isset($_SESSION['EMAIL'])) {
@@ -15,7 +15,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 
@@ -479,7 +479,7 @@ if ($配属人数 == 3) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_Q"]["size"]);
   $pdf->Text($xl + $item["iii_c_Q"]["x"] * $x0, $yt + $item["iii_c_Q"]["y"] * $y0, $dat1);
@@ -496,7 +496,7 @@ if ($配属人数 == 3) {
 
 
   } else {
-  
+
 
 
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21, "size" => 11);
@@ -571,7 +571,7 @@ if ($配属人数 == 3) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
 
     $item["iii_c_AC"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
@@ -591,7 +591,7 @@ if ($配属人数 == 3) {
 
 
   } else {
-  
+
 
 
     $item["iii_c_AC"]       = array("x" => 10, "y" => 21, "size" => 11);
@@ -672,7 +672,7 @@ if ($配属人数 == 3) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
     $item["iii_c_AO"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
     $pdf->SetFont($font, '', $item["iii_c_AO"]["size"]);
@@ -686,7 +686,7 @@ if ($配属人数 == 3) {
 
 
   } else {
-  
+
 
     $item["iii_c_AO"]       = array("x" => 10, "y" => 21, "size" => 11);
     $pdf->SetFont($font, '', $item["iii_c_AO"]["size"]);
@@ -748,8 +748,8 @@ if ($配属人数 == 3) {
   $xxx = $xl + $item["iii_a_AB"]["x"] * $x0;
   $yyy = $yt + $item["iii_a_AB"]["y"] * $y0;
 
-  // 
-  
+  //
+
 
 $総額 = $積算日 * (float)($_REQUEST["iii_a_AA"] ?? 0);
 
@@ -875,7 +875,7 @@ if ($配属人数 == 4) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21+0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_Q"]["size"]);
@@ -887,7 +887,7 @@ if ($配属人数 == 4) {
   $pdf->Text($xl + $item["iii_c_Q"]["x"] * $x0, $yt + $item["iii_c_Q"]["y"] * $y0, $dat2);
 
   } else {
-  
+
 
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_Q"]["size"]);
@@ -954,7 +954,7 @@ if ($配属人数 == 4) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
   $item["iii_c_AC"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_AC"]["size"]);
@@ -966,7 +966,7 @@ if ($配属人数 == 4) {
   $pdf->Text($xl + $item["iii_c_AC"]["x"] * $x0, $yt + $item["iii_c_AC"]["y"] * $y0, $dat2);
 
   } else {
-  
+
 
   $item["iii_c_AC"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_AC"]["size"]);
@@ -1038,7 +1038,7 @@ if ($配属人数 == 4) {
   $pdf->SetFont($font, '', $item["iii_c_AO"]["size"]);
   $pdf->Text($xl + $item["iii_c_AO"]["x"] * $x0, $yt + $item["iii_c_AO"]["y"] * $y0, $dat2);
   } else {
-  
+
   $item["iii_c_AO"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_AO"]["size"]);
   $pdf->Text($xl + $item["iii_c_AO"]["x"] * $x0, $yt + $item["iii_c_AO"]["y"] * $y0, $dat);
@@ -1112,7 +1112,7 @@ if ($配属人数 == 4) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
   $item["iii_c_BA"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_BA"]["size"]);
   $pdf->Text($xl + $item["iii_c_BA"]["x"] * $x0, $yt + $item["iii_c_BA"]["y"] * $y0, $dat1);
@@ -1174,7 +1174,7 @@ if ($配属人数 == 4) {
   //    $pdf->Text($xl + $item["iii_a_AB"]["x"] * $x0, $yt + $item["iii_a_AB"]["y"] * $y0, number_format($_REQUEST["iii_a_AB"]));
   //  }
 
-  // 
+  //
   $総額 = $積算日 * $_REQUEST["iii_a_AA"];
   //  stop($積算日."*".$_REQUEST["iii_a_AA"]."=".$総額);
 
@@ -1312,7 +1312,7 @@ if ($配属人数 == 5) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_Q"]["size"]);
@@ -1326,7 +1326,7 @@ if ($配属人数 == 5) {
 
 
   } else {
-  
+
 
   $item["iii_c_Q"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_Q"]["size"]);
@@ -1397,7 +1397,7 @@ if ($配属人数 == 5) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
   $item["iii_c_AC"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_AC"]["size"]);
@@ -1410,7 +1410,7 @@ if ($配属人数 == 5) {
 
 
   } else {
-  
+
 
   $item["iii_c_AC"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_AC"]["size"]);
@@ -1476,7 +1476,7 @@ if ($配属人数 == 5) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
 
   $item["iii_c_AO"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
@@ -1488,7 +1488,7 @@ if ($配属人数 == 5) {
   $pdf->Text($xl + $item["iii_c_AO"]["x"] * $x0, $yt + $item["iii_c_AO"]["y"] * $y0, $dat2);
 
   } else {
-  
+
 
 
   $item["iii_c_AO"]       = array("x" => 10, "y" => 21, "size" => 11);
@@ -1558,19 +1558,19 @@ if ($配属人数 == 5) {
     $dat1 = mb_substr($dat, 0, 6, 'utf8');
     $dat2 = mb_substr($dat, 6, 6, 'utf8');
 
-  
+
 
   $item["iii_c_BA"]       = array("x" => 10, "y" => 21-0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_BA"]["size"]);
   $pdf->Text($xl + $item["iii_c_BA"]["x"] * $x0, $yt + $item["iii_c_BA"]["y"] * $y0, $dat1);
 
-   
+
 
   $item["iii_c_BA"]       = array("x" => 10, "y" => 21+0.4, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_BA"]["size"]);
   $pdf->Text($xl + $item["iii_c_BA"]["x"] * $x0, $yt + $item["iii_c_BA"]["y"] * $y0, $dat2);
   } else {
-  
+
 
   $item["iii_c_BA"]       = array("x" => 10, "y" => 21, "size" => 11);
   $pdf->SetFont($font, '', $item["iii_c_BA"]["size"]);

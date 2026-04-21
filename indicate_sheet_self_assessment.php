@@ -10,7 +10,7 @@ function h($s)
   return htmlspecialchars($s, ENT_QUOTES, 'utf-8');
 }
 
-require_once('../../files/config_db_taisho2025.php');
+require_once('./files/config_db_taisho2025.php');
 require_once('./common/function.php');
 
 $ACTION = "student_list.php";
@@ -163,10 +163,10 @@ $総合評価項目 = "総合評価（上記の評価を踏まえて、評定す
 
 
 
-/*$_SESSION['EMAIL'] 
-  $_SESSION['NAME'] 
+/*$_SESSION['EMAIL']
+  $_SESSION['NAME']
   $_SESSION['KUBUN']
-  $_SESSION['SEL_STUDENT_NUMBER'] 
+  $_SESSION['SEL_STUDENT_NUMBER']
   */
 
 
